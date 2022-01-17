@@ -1,0 +1,106 @@
+--bad drip
+--alexthescott
+--8/25/21
+
+p={8,136,130,11,139,131,12,140,129}
+pal(p,1)
+global_color=1
+global_tick=1
+
+function burn()
+	-- drip pixels, fade color
+	-- respect even/odd y pos
+	for p=0,2024do
+		x=rnd(128)\1
+		y=rnd(128)\1
+		pc=pget(x,y)
+		npc=pget(x,y+2)
+		if y%2==0 then
+			d=2
+		else 
+			d=-2
+		end
+		if pc!=0 and pc==npc then
+			if pc%3!=0 then
+				if rnd(10)\1==0 then
+					pset(x,y,pc+1)
+				else
+					pset(x,y,pc)
+				end
+			end
+			pset(x,y+d,pc)
+		elseif pc!=0 then
+			pset(x,y+d,pc)
+		end
+	end
+end
+
+function add_brush()
+	local b={}
+	
+	b.x=0
+	if global_tick==1 then
+		b.y=0
+	else
+		b.y=127
+	end
+	b.c=global_color
+	b.v=1
+	
+	b.update=function(slf)
+	 slf.x+=slf.v
+	end
+	
+	b.set_c=function(slf,c)
+		slf.c=c
+	end
+	
+	b.draw=function(slf)
+		pset(slf.x,slf.y,slf.c)
+	end
+	
+	b.destroy=function(slf)
+		if slf.x>=128 then
+			del(brushes,slf)
+		end
+	end
+	
+	global_tick+=1
+	global_tick%=2
+	
+	add(brushes,b)
+end
+
+brushes={}
+add_brush()
+add_brush()
+
+cls()
+::♥::
+if t()<2 then
+	print("bad drip",48,64,1)
+else
+	burn()
+	
+	if t()%5==0 then
+		add_brush()
+		add_brush()
+	end
+	
+	if t()%10==0 then
+		for b in all(brushes) do
+			b:set_c(global_color)
+		end
+		global_color+=3
+		global_color%=9
+	end
+	
+	for b in all(brushes) do
+		b:draw()
+		b:update()
+		b:destroy()
+	end
+end
+
+flip()
+goto ♥

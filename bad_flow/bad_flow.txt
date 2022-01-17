@@ -1,0 +1,243 @@
+-- bad flow
+-- alexthescott
+-- 11/11/21 5:18pm
+
+-- new seed every day of the year 
+srand(31*stat(81)+stat(82)) 
+
+p1={7,6,135,10,138,11,139,3,131,12,140,1,129,130,128,0}
+p2={7,135,10,9,15,143,142,137,14,136,8,2,130,133,128,0}
+p3={7,15,143,142,14,8,136,137,9,10,135,138,11,139,12,140}
+
+p={p1,p2,p3}
+c=rnd(p)
+
+pal(c,1)
+
+glen=8
+
+-- mirror top-left quarter
+poke(0x5f2c, 7) 
+
+function new_flow()
+	f={}
+	f.glen=glen
+	f.flow={}
+	
+	-- build flow
+	for ny=0,128,f.glen do
+		for nx=0,128,f.glen do
+			g={x=nx,y=ny}
+			if nx==0 and ny==0 then
+				g.a=((1+rnd(8))\1)*1/8
+			elseif ny==0 then
+				prior_a=f.flow[nx\f.glen].a
+				g.a=prior_a+sin(1/((1+rnd(8)\1)*1/8))
+				g.a=max(g.a,0.0)
+				g.a=min(g.a,1)
+				while g.a==0 or g.a==0.5 do
+					g.a=prior_a+sin(1/((1+rnd(8)\1)*1/8))
+					g.a=max(g.a,0.0)
+					g.a=min(g.a,1)
+				end
+			else
+				prior_a=f.flow[ny\f.glen+nx\f.glen].a
+				g.a=prior_a+sin(rnd())/10
+				g.a=max(g.a,0.0)
+				g.a=min(g.a,1)
+				while g.a==0 or g.a==0.5 do
+					g.a=prior_a+sin(rnd())/10
+					g.a=max(g.a,0.0)
+					g.a=min(g.a,1)
+				end
+			end
+			add(f.flow,g)
+		end
+	end
+	
+	f.draw=function(self)
+		for g in all(self.flow) do
+			rect(g.x,g.y,
+							g.x+f.glen,g.y+self.glen,3)
+		
+			-- draw flow lines
+			cx=g.x+self.glen/2
+			cy=g.y+self.glen/2
+			x_dif=cos(g.a)*self.glen/4
+			y_dif=sin(g.a)*self.glen/4
+			ax=cx-x_dif
+			ay=cy-y_dif
+			bx=cx+x_dif
+			by=cy+y_dif
+			line(ax,ay,bx,by,7)
+		end
+	end
+	return f
+end
+
+function new_bird()
+	b={}
+	dist=64
+	d=(rnd()*4)\1
+	b.c=14-(rnd()*10)\1
+	--small distribution
+	b.s=rnd(2)/1
+	if d==0 then
+		b.pos={x=rnd()*128,y=0}
+	elseif d==1 then
+		b.pos={x=127,y=rnd()*128}
+	elseif d==2  then
+		b.pos={x=rnd()*128,y=127}
+	else
+		b.pos={x=0,y=rnd()*128}
+	end
+	
+	b.pos={x=rnd()*128,y=rnd()*128}
+	
+	b.vel={x=0,y=0}
+	
+	b.update=function(self)
+		self.pos.x+=self.vel.x
+		self.pos.y+=self.vel.y
+		p=self.pos
+		
+		if p.x<-16 or p.x>144 or
+			p.y<-16 or p.y>144 then
+				val=del(birds,self)
+		end
+		
+		i=1+((p.y\glen)*(128\glen)+p.x\glen)
+		if i<=0 or i>=(128/glen)^2 then
+			return
+		else
+			cf=flow.flow[i].a
+			
+			self.vel.x+=cos(cf)/200
+			self.vel.y+=sin(cf)/200
+		end
+		
+	end
+	
+	b.draw=function(self)
+		p=self.pos
+		circfill(p.x,p.y,self.s,self.c)
+	end
+	
+	b.debug=function(self)
+		p=self.pos
+		print(p.y,60,48,1)
+		print(p.x,60,54,1)
+		print(p.x<-16,1,0,1)
+		print(p.y<-16,1,6,1)
+		print(p.x>144,1,12,1)
+		print(p.x>144,1,18,1)
+		val=p.x<-16 or p.x>144 or
+				p.y<-16 or p.y>144
+		print(#birds,1,24,1)
+	end
+		
+	add(birds,b)
+end
+
+function forward()
+	v=c[1]
+	del(c,v)
+	c[#c+1]=v
+	pal(c,1)
+end
+
+function backward()
+	v=c[#c]
+	del(c,v)
+	for i=#c+1,1,-1 do
+		if i!=1 then
+			c[i]=c[i-1]
+		else
+			c[i]=v
+		end
+	end
+	pal(c,1)
+end
+
+dir=((rnd(2)\1)*2)-1
+amt=2^((rnd()*3)\1)
+fuzz_l=rnd()<0.1
+fuzz_r=rnd()<0.1
+
+function burn()
+	for i=1,512 do	
+		if i<amt then
+			local p=0x5ffe+rnd(8128)\1
+			if version==0 then
+				poke2(p+64,peek2(p))
+				poke2(p+dir,peek2(p))
+			elseif version==1 then
+				poke2(p+64,peek2(p))
+				poke2(p+dir,peek2(p)-0.1)
+			else
+				poke2(p+64,peek2(p)-0.1)
+				poke2(p+dir,peek2(p))
+			end
+		end
+		x=(128*rnd())\1
+		y=(128*rnd())\1
+		pc=pget(x,y)
+		if pc>0 then
+			pset(x,y,pc-1)
+			if(fuzz_l)pset(x-1,y,pc-1)
+			if(fuzz_r)pset(x+1,y,pc-1)
+		else
+			circ(x,y,0,0)
+		end
+	end
+end
+
+for i=1,rnd()*16 do
+	forward()
+end
+
+
+flow=new_flow()
+birds={}
+new_bird()
+
+fc=0
+
+seed=rnd()
+srand(seed)
+
+_set_fps(60)
+cls()
+::♥::
+--cls()
+burn()
+
+if fc%3==0 then
+	new_bird()
+end
+
+if fc%600==0 then
+	fc=0
+	srand(seed)
+end
+
+--f:draw()
+
+for b in all(birds) do	
+	b:update()
+	b:draw()
+end
+--rect(0,0,127,127,2)
+
+fc+=1
+
+if arti==1 then
+	circ(80,64,32,10)
+	circ(64,80,32,10)
+elseif arti==2 then
+	circ(60,60,32,10)
+	circ(60,60,32,10)
+end
+
+flip()
+goto ♥

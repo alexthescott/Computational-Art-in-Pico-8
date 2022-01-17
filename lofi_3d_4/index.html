@@ -1,0 +1,529 @@
+﻿<html manifest="game.manifest">                                           <!-- <= LINK TO MANIFEST (to cache files for offline-access= -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!--
+    Based on https://github.com/headjump/pico8_html_template
+    You are free to remove this comment or leave it here so others may find and use the repo as well :)
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="carson">           <!-- <= WEBAPP TITLE -->
+  <link rel="apple-touch-icon" href="cover.gif">                           <!-- <= YOUR ICON -->
+  <link rel="icon" href="cover.gif">                                       <!-- <= YOUR ICON -->
+  <!--
+    Icon info:
+    ----------
+    There are many different resolutions for different devices supported or recommended,
+    but I wanted this template to be easy to use "manually" and for me it works fine
+    to have a single PNG icon at 200x200. (200x200 is the minimum for facebok-sharing to use the og:image as thumbnail)
+  -->
+  <title>lowfi 3d 3</title>                                               <!-- <= WEBSITE TITLE -->
+  <meta name="description" content="twitter.com/alexthescott">                    <!-- <= SITE DESCRIPTION as seen by web-search-engines -->
+
+  <!-- Info as seen by sharing apps like WhatsApp or Facebook, so they can show a preview-image and description when you share the URL -->
+  <meta property="og:type"        content="game" />
+  <meta property="og:description" content="twitter.com/alexthescott" />                                         <!-- <= GAME DESCRIPTION -->
+
+  <style TYPE="text/css">
+    /* ------- DEFINE BUTTON COLORS ------- */
+    :root {
+      --btn: #1288D1;
+      --btn--pressed: #29ADFF;
+
+      --btnIcon: #ffffff;
+      --btnIcon--pressed: #d6d6d6;
+
+      --btn__analogBg: #232f37;
+    }
+    body {padding: 0; margin: 0; outline: none; background: auto; overflow: hidden; }
+
+    /* ------ POSITION GAME-CANVAS ------ */
+    canvas#canvas {
+      width: min(70vh,70vw); height: min(70vh,70vw)
+      image-rendering: optimizeSpeed;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: optimize-contrast;
+      image-rendering: pixelated;
+      -ms-interpolation-mode: nearest-neighbor;
+      border: 0;
+    }
+    .canvas-wrapper {
+		text-align: center; 
+		display: grid;
+		justify-content: space-around;
+		align-items: center;
+		justify-items: center;
+	}
+    .canvas-wrapper canvas { margin: 0 auto; }    /* center game */
+	
+	.btns{
+		margin-top: 24px;
+	}
+	
+	
+    /* ------ HELPER CLASSES FOR TOUCH ELEMENTS ------ */
+    .touch-not-supported .show-if-touch { display: none; }
+    .touch-supported .show-if-not-touch { display: none; }
+
+    /* ------ HELPER CLASSES FOR STANDALONE ELEMENTS ------ */
+    .not-standalone .show-if-standalone { display: none; }
+    .is-standalone .show-if-not-standalone { display: none; }
+  </style>
+
+</head>
+
+<body">
+<script type="text/javascript">
+  // ----------------- DISPLAY TOUCH CONTROLS? ----------------- %>
+  document.body.className += " touch-supported";
+  window.TOUCH = true;
+
+  // To test both TOUCH and STANDALONE, add "?touch&standalone" to the URL
+</script>
+
+<div class="canvas-wrapper">
+  <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+  <div id="btns-wrapper" class="show-if-touch clear">
+  <div id="btns-markUsedButtonset"><!-- Gets class for used buttonset
+                                    (don't add other classes here, they'll get overridden! -->
+    <div id="btns-markPressed">   <!-- Gets classes for all pressed buttons:
+                                    'pressed_L', 'pressed_R', 'pressed_U', 'pressed_D', 'pressed_X', 'pressed_O'
+                                    (don't add other classes here, they'll get overridden! -->
+
+
+      <!------- BUTTONSET 1 - buttons only ----------
+             
+                O  X
+             
+      -------------------------------->
+      <div class="btns buttonset buttonset-1">
+		  <div class="buttonset-dpad">
+			<div class="dpad-spacer"></div>
+			<div class="btn-fire-u btn">
+			  <svg width="(1/6)*min(95vh,95vw)" height="min(5vh,5vw)" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+				<circle cx="15" cy="15" r="11.253" style="fill:#ffffff;"></circle>
+				<polygon points="8,20 22,20 15,8" style="fill:#000000;stroke:#000000;"></polygon>
+			  </svg>
+			</div>
+			<div class="dpad-spacer"></div>
+			<div class="btn-fire-l btn">
+			  <svg width="(1/6)*min(95vh,95vw)" height="min(5vh,5vw)" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+				<circle cx="15" cy="15" r="11.253" style="fill:#ffffff;"></circle>
+				<polygon points="8,15 20,8 20,22" style="fill:#000000;stroke:#000000;"></polygon>
+			  </svg>
+			</div>
+			<div class="dpad-spacer"></div>
+			<div class="btn-fire-r btn">
+			  <svg width="(1/6)*min(95vh,95vw)" height="min(5vh,5vw)" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+				<circle cx="15" cy="15" r="11.253" style="fill:#ffffff;"></circle>
+				<polygon points="22,15 9,8 9,22" style="fill:#000000;stroke:#000000;"></polygon>
+			  </svg>
+			</div>
+			<div class="dpad-spacer"></div>
+			<div class="btn-fire-d btn">
+			  <svg width="(1/6)*min(95vh,95vw)" height="min(5vh,5vw)" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+				<circle cx="15" cy="15" r="11.253" style="fill:#ffffff;"></circle>
+				<polygon points="8,9 22,9 15,23" style="fill:#000000;stroke:#000000;"></polygon>
+			  </svg>
+			</div>
+			<div class="dpad-spacer"></div>
+		  </div>
+
+		  <div class="buttonset-action">
+			
+			<div class="btn-fire-x btn">
+			  <svg width="(1/6)*min(95vh,95vw)" height="min(5vh,5vw)" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+				<circle cx="15" cy="15" r="11.253" style="fill:#ffffff;"></circle>
+				<path d="M 11 10 L 15 15 L 19 10 L 19 10 L 15 15 L 19 20 L 19 20 L 15 15 L 11 20 L 11 20 L 15 15 L 11 10 L 11 10 Z" style="fill:#000000;stroke:#000000;"></path>
+			  </svg>
+			</div>
+			<div class="btn-fire-o btn">
+			  <svg width="(1/6)*min(95vh,95vw)" height="min(5vh,5vw)" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+				<circle cx="15" cy="15" r="11.253" style="fill:#ffffff;"></circle>
+				<circle cx="15" cy="15" r="6" style="fill:#000000;"></circle>
+				<circle cx="15" cy="15" r="5" style="fill:#ffffff;"></circle>
+			  </svg>
+			</div>
+		  </div>
+		</div>
+
+        <div class="clear"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<div>
+  <script type="text/javascript">
+	var invertString = function (str) {
+		var s = '';
+		var i = 0;
+		while (i < str.length) {
+			var n = str.charAt(i);
+			if (n == n.toUpperCase()) {
+				// *Call* toLowerCase
+				n = n.toLowerCase();
+			} else {
+				// *Call* toUpperCase
+				n = n.toUpperCase();
+			}
+
+			i += 1;
+			s += n; 
+		}
+		return s;
+	};
+	let hashedAddr;
+	let viewerAddress;
+	let params = new URLSearchParams(window.location.search);
+	const viewer = params.get("viewer");
+
+	if (params.has('viewer')) {
+		viewerAddress = invertString(viewer);
+	} else {
+		viewerAddress = "unsynced";
+	}
+	console.log("Viewer Address: "+ viewerAddress);
+	  
+    // ------ SETUP USED FOR PICO8 CART ------
+    var
+      canvas = document.getElementById("canvas"),
+      Module = {canvas: canvas, arguments: ["-gif_len", "16", "-p", viewerAddress]};
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // ------ BLOCK CURSOR-KEYS FROM SCROLLING ------
+    var onKeyDown_blocker= function(event) {
+      event = event || window.event;
+      var o = document.activeElement;
+      if (!o || o == document.body || o.tagName == "canvas") {
+        if ([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
+          if (event.preventDefault) event.preventDefault();
+        }
+      }
+    };
+    document.addEventListener('keydown', onKeyDown_blocker, false);
+  </script>
+
+  <script async type="text/javascript" src="lofi_3d_4.js"></script>       <!-- <= INCLUDES YOUR cart.js FILE -->
+
+<style>
+  .pressed_X .btn-fire-x,
+  .pressed_O .btn-fire-o,
+  .pressed_U .btn-fire-u,
+  .pressed_D .btn-fire-d,
+  .pressed_L .btn-fire-l,
+  .pressed_R .btn-fire-r {
+    background-color: var(--btn--pressed); /* change color when pressed */
+  }
+  .pressed_X .btn-fire-x svg path,
+  .pressed_O .btn-fire-o svg path,
+  .pressed_U .btn-fire-u svg path,
+  .pressed_D .btn-fire-d svg path,
+  .pressed_L .btn-fire-l svg path,
+  .pressed_R .btn-fire-r svg path {
+    fill: var(--btnIcon--pressed) !important; /* change color when pressed */
+  }
+
+
+.buttonset {
+  width: min(40vw,40vh);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+.buttonset-dpad {
+  width: min(20vw,20vh);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr)
+}
+
+.buttonset-action {
+  width: min(20vw,20vh);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.btn-fire-x {
+  position: relative;
+  //top: -15px;
+}
+.btn-fire-o {
+  position: relative;
+  //top: 15px;
+}
+</style>
+
+<script type="text/javascript">
+  // --------- HANDLE TOUCH-EVENTS ON BUTTONS ---------
+  //
+  // IMPORTANT FOR TESTING:
+  //   The buttons ONLY work with touch-events, so you can't test them
+  //   on a regular browser with your mouse.
+  //   Chrome allows for simulating touch-events in the developer-tools:
+  //   -> https://developers.google.com/web/tools/chrome-devtools/device-mode/
+  if(true) {
+    var
+      GPIO_BUTTONSET_INDEX=0,
+      GPIO_ANALOG_X_INDEX=1,
+      GPIO_ANALOG_Y_INDEX=2,
+      pico8_buttons = [0, 0, 0, 0, 0, 0, 0, 0], // <= the first element in this array will be updated by the touch-buttons
+      pico8_gpio = new Array(128),              // <= used to let pico8-cart change buttonset
+      changeButtonset;                          // usage: changeButtonset(2) to activates .buttonset-2
+
+    (function(){ // locally scoped
+      var
+        allAnalogSticks=document.querySelectorAll(".axis-analog .btn__stick");
+
+      var setAnalogAxis=function(x,y){
+        pico8_gpio[GPIO_ANALOG_X_INDEX]=x;
+        pico8_gpio[GPIO_ANALOG_Y_INDEX]=y;
+      };
+
+      var resetAnalogSticks = function(sticks_or_null) {
+        setAnalogAxis(100,100);
+        sticks_or_null || (sticks_or_null=allAnalogSticks);
+        var st;
+        for(var i=0; i<sticks_or_null.length; i++){
+          st=allAnalogSticks[i];
+          st.style.left="50%"; st.style.top="50%";
+        }
+      };
+      resetAnalogSticks();
+
+      changeButtonset=(function(){
+        classHolder=document.getElementById("btns-markUsedButtonset");
+        var current=-1;
+
+        // poll for pico8_gpio to check if PICO8-game wants a buttonset-change
+        window.setInterval(function(){
+          var from_pico8 = pico8_gpio[GPIO_BUTTONSET_INDEX];
+          if(!!from_pico8) changeButtonset(from_pico8);
+        },100);
+
+        return function(buttonset_number){
+          if(current!==buttonset_number) {
+            pico8_buttons[0] = 0; // reset pico btns
+            if(pico8_gpio[GPIO_BUTTONSET_INDEX]!==buttonset_number){
+              pico8_gpio[GPIO_BUTTONSET_INDEX]=buttonset_number;
+            }
+            analogs=[0,0];        // reset analog stick
+            classHolder.className = "buttonset-use-" + buttonset_number;
+            resetAnalogSticks();
+            current=buttonset_number;
+          }
+        };
+
+      }());
+      changeButtonset(1); // set starting buttonset!
+
+      var
+        updatePressedClasses = (function() {
+          var target = document.getElementById("btns-markPressed");
+          return function() {
+            var classes="",pressed=pico8_buttons[0];
+            for(var key_string in KEY) {
+              if(KEY.hasOwnProperty(key_string) && ((pressed & KEY[key_string]) > 0)) classes+= " pressed_" + key_string;
+            }
+            target.className = classes;
+          };
+        }()),
+        KEY = { L: 1, R: 2, U: 4, D: 8, O: 16, X: 32 },
+
+        btnDown = function(key) { pico8_buttons[0] |= key; updatePressedClasses(); },
+        btnUp   = function(key) { pico8_buttons[0] &= ~key; updatePressedClasses(); },
+        btnAxis = function(active_keys) {
+          pico8_buttons[0] &= ~(KEY.U | KEY.D | KEY.L | KEY.R); // clear all axes
+          for(var i=0; i<active_keys.length;i++) { pico8_buttons[0] |= active_keys[i]; }
+          updatePressedClasses();
+        },
+        relTouchPosInEl = function(el, touch) {
+          var rect = el.getBoundingClientRect();
+          if(rect.width === 0 || rect.height === 0) return {x: 0, y: 0};
+          return {
+            x: Math.min(1, Math.max(0, (touch.clientX - rect.left) / rect.width)),
+            y: Math.min(1, Math.max(0, (touch.clientY - rect.top) / rect.height))
+          };
+        },
+        xAxisUpdate = function(el, touch) {
+          if(!touch) return; // can occur when switching buttonsets
+          var
+            pos = relTouchPosInEl(el, touch),
+            x_axis = 0, y_axis = 0;
+          if(pos.x < .4) x_axis = KEY.L;
+          if(pos.x > .6) x_axis = KEY.R;
+          btnAxis([x_axis, y_axis]);
+        },
+        yAxisUpdate = function(el, touch) {
+          if(!touch) return; // can occur when switching buttonsets
+          var
+            pos = relTouchPosInEl(el, touch),
+            x_axis = 0, y_axis = 0;
+          if(pos.y < .4) y_axis = KEY.U;
+          if(pos.y > .6) y_axis = KEY.D;
+          btnAxis([x_axis, y_axis]);
+        },
+        xyAxisUpdate = function(el, touch) {
+          if(!touch) return; // can occur when switching buttonsets
+          var
+            pos = relTouchPosInEl(el, touch),
+            x_axis = 0, y_axis = 0,
+            x_range = .3, y_range = .3;
+          if(pos.x < x_range) x_axis = KEY.L;
+          if(pos.x > 1-x_range) x_axis = KEY.R;
+          if(pos.y < y_range) y_axis = KEY.U;
+          if(pos.y > 1-y_range) y_axis = KEY.D;
+          btnAxis([x_axis, y_axis]);
+        },
+        analogAxisUpdate = function(el, stick, touch) {
+          if(!touch) return; // can occur when switching buttonsets
+          var
+            pos = relTouchPosInEl(el, touch),
+            x_border=.15, y_border=.15,
+            x_val=pos.x-.5,y_val=pos.y-.5, // both for axis-value calculation
+            x_stick=pos.x,y_stick=pos.y;   // both for Stick-graphic placement
+          if(x_val<-.5+x_border)x_val=-.5+x_border;
+          if(x_val>.5-x_border)x_val=.5-x_border;
+          if(y_val<-.5+y_border)y_val=-.5+y_border;
+          if(y_val>.5-y_border)y_val=.5-y_border;
+          if(x_stick<x_border)x_stick=x_border;
+          if(x_stick>1-x_border)x_stick=1-x_border;
+          if(y_stick<y_border)y_stick=y_border;
+          if(y_stick>1-y_border)y_stick=1-y_border;
+          stick.style.left=""+Math.round(x_stick*100)+"%";
+          stick.style.top=""+Math.round(y_stick*100)+"%";
+          setAnalogAxis(Math.floor(x_val/(.5-x_border)*50+100) , Math.floor(y_val/(.5-y_border)*50+100));
+        },
+        axisEnd = function() { btnAxis([]); },
+        killEvt = function(evt) { evt.preventDefault(); evt.stopPropagation(); },
+        touchfinder=function(){
+          var touchid=null;
+          return {
+            fillFromTouchStart:function(evt,el){
+              var
+                touches, touch,
+                toucharea = el.getBoundingClientRect();
+
+              console.log(toucharea.left, toucharea.right);
+
+              if(touches = evt.changedTouches){
+                for(var i=0; i<touches.length; i++){
+                  touch=touches[i];
+                  console.log(touch.clientX);
+                  if( // is correct touchpoint?
+                    (touch.clientX > toucharea.left - 10) &&
+                    (touch.clientX < toucharea.right + 10) &&
+                    (touch.clientY > toucharea.top - 10) &&
+                    (touch.clientY < toucharea.bottom + 10)
+                  ) {
+                    touchid=touch.identifier;
+                    return touch;
+                  }
+                }
+              }
+              touchid=null;
+              return null;
+            },
+            findFromTouchMove:function(evt){
+              if(touchid === null) return null;
+              var touches,touch;
+              if(touches=evt.changedTouches) {
+
+                for(var i=0; i<touches.length; i++){
+                  touch=touches[i];
+                  if(touch.identifier===touchid) { return touch; }
+                }
+              }
+              return null;
+            },
+            clear:function(){ touchid = null; }
+          };
+        },
+        addAnalogAxis = function(el) {
+          var
+            stick=el.querySelector('.btn__stick'),
+            find_my_touch=touchfinder();
+          el.addEventListener("touchstart", function(evt){ killEvt(evt); analogAxisUpdate(el, stick, find_my_touch.fillFromTouchStart(evt,el)); }, false);
+          el.addEventListener("touchmove", function(evt){ killEvt(evt); analogAxisUpdate(el, stick, find_my_touch.findFromTouchMove(evt)); }, false);
+          el.addEventListener("touchend", function(evt){ find_my_touch.clear(); killEvt(evt); resetAnalogSticks([stick]); }, false);
+          el.addEventListener("touchcancel", function(evt){ find_my_touch.clear(); killEvt(evt); resetAnalogSticks([stick]); }, false);
+        },
+        addXAxis = function(el) {
+          var find_my_touch=touchfinder();
+          el.addEventListener("touchstart", function(evt){ killEvt(evt); xAxisUpdate(el, find_my_touch.fillFromTouchStart(evt,el)); }, false);
+          el.addEventListener("touchmove", function(evt){ killEvt(evt); xAxisUpdate(el, find_my_touch.findFromTouchMove(evt)); }, false);
+          el.addEventListener("touchend", function(evt){ find_my_touch.clear(); killEvt(evt); axisEnd(); }, false);
+          el.addEventListener("touchcancel", function(evt){ find_my_touch.clear(); killEvt(evt); axisEnd(); }, false);
+        },
+        addYAxis = function(el) {
+          var find_my_touch=touchfinder();
+          el.addEventListener("touchstart", function(evt){ killEvt(evt); yAxisUpdate(el, find_my_touch.fillFromTouchStart(evt,el)); }, false);
+          el.addEventListener("touchmove", function(evt){ killEvt(evt); yAxisUpdate(el, find_my_touch.findFromTouchMove(evt)); }, false);
+          el.addEventListener("touchend", function(evt){ find_my_touch.clear(); killEvt(evt); axisEnd(); }, false);
+          el.addEventListener("touchcancel", function(evt){ find_my_touch.clear(); killEvt(evt); axisEnd(); }, false);
+        },
+        addXYAxis = function(el) {
+          var find_my_touch=touchfinder();
+          el.addEventListener("touchstart", function(evt){ killEvt(evt); xyAxisUpdate(el, find_my_touch.fillFromTouchStart(evt,el)); }, false);
+          el.addEventListener("touchmove", function(evt){ killEvt(evt); xyAxisUpdate(el, find_my_touch.findFromTouchMove(evt)); }, false);
+          el.addEventListener("touchend", function(evt){ find_my_touch.clear(); killEvt(evt); axisEnd(); }, false);
+          el.addEventListener("touchcancel", function(evt){ find_my_touch.clear(); killEvt(evt); axisEnd(); }, false);
+        },
+        addButton = function(el, key) {
+          el.addEventListener("touchstart", function(evt){ killEvt(evt); btnDown(key); }, false);
+          el.addEventListener("mousedown", function(evt){ killEvt(evt); btnDown(key); }, false);
+
+          el.addEventListener("touchmove", killEvt, false);
+          el.addEventListener("mousemove", killEvt, false);
+
+          el.addEventListener("touchend", function(evt){ killEvt(evt); btnUp(key); }, false);
+          el.addEventListener("mouseup", function(evt){ killEvt(evt); btnUp(key); }, false);
+
+          el.addEventListener("touchcancel", function(evt){ killEvt(evt); btnUp(key); }, false);
+        };
+
+      var
+        axisXs=document.getElementsByClassName("axis-leftRight"),
+        axisXYs=document.getElementsByClassName("axis-upDownLeftRight"),
+        axisYs=document.getElementsByClassName("axis-upDown"),
+        axisAnalogs=document.getElementsByClassName("axis-analog"),
+        xBtns=document.getElementsByClassName("btn-fire-x"),
+        oBtns=document.getElementsByClassName("btn-fire-o"),
+        lBtns=document.getElementsByClassName("btn-fire-l"),
+        rBtns=document.getElementsByClassName("btn-fire-r"),
+        dBtns=document.getElementsByClassName("btn-fire-d"),
+        uBtns=document.getElementsByClassName("btn-fire-u"),
+        i;
+
+      for(i=0; i<axisXs.length; i++){ addXAxis(axisXs[i]); }
+      for(i=0; i<axisXYs.length; i++){ addXYAxis(axisXYs[i]); }
+      for(i=0; i<axisYs.length; i++){ addYAxis(axisYs[i]); }
+      for(i=0; i<axisAnalogs.length; i++){ addAnalogAxis(axisAnalogs[i]); }
+      for(i=0; i<xBtns.length; i++){ addButton(xBtns[i], KEY.X); }
+      for(i=0; i<oBtns.length; i++){ addButton(oBtns[i], KEY.O); }
+      for(i=0; i<lBtns.length; i++){ addButton(lBtns[i], KEY.L); }
+      for(i=0; i<rBtns.length; i++){ addButton(rBtns[i], KEY.R); }
+      for(i=0; i<dBtns.length; i++){ addButton(dBtns[i], KEY.D); }
+      for(i=0; i<uBtns.length; i++){ addButton(uBtns[i], KEY.U); }
+
+
+
+      // prevent "tilt-zooming" when accidentally touching between the buttons
+      document.getElementById("btns-wrapper").addEventListener("touchstart", function(evt){ evt.preventDefault(); }, false);
+    })();
+    document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    var keyCode = evt.keyCode;
+    if (keyCode >= 37 && keyCode <= 40) {
+        return false;
+    }
+};
+  }
+</script>
+
+</body></html>

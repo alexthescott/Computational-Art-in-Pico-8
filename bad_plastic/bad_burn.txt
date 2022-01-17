@@ -1,0 +1,9 @@
+A screensaver for Pico-8, inspired by the menu backgrounds found on consoles of the early 2010s. An exploration of plasma, and pseudo noise over ten palettes, each with two offset values applied. 
+I encourage you to read the source code, and change some variables around to pull back the curtain! Written and debugged in Pico-8.
+
+creator: Alex Scott
+source: https://pastebin.com/F9yv4LGG
+date: 2022-1-1 4:11pm
+twitter: @alexthescott
+website: alexthescott.space
+platform: Pico-8, Lua

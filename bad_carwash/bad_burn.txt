@@ -1,0 +1,8 @@
+Two lines of soap hit the inside of your screen, forming a regularly followed path as the remnants try to dance away. One of eight palettes is chosen, as a palette offset choses the window of color from which to draw. The joy of peek() + poke() on full display! Written and debugged in Pico-8.
+
+creator: Alex Scott
+source: https://pastebin.com/APEPjK87
+date: 2022-1-1 4:11pm
+twitter: @alexthescott
+website: alexthescott.space
+platform: Pico-8, Lua

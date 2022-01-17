@@ -1,0 +1,10 @@
+Lightning strikes the screen and pixels burn, decay, fall off the edge. I encourage you to read the source code, change some values around, and find a remix that scratches your itch. Written and debugged in Pico-8.
+
+creator: Alex Scott
+source: https://pastebin.com/P5rLHVzy
+date: 2021-11-22 11:00pm
+twitter: @alexthescott
+website: alexthescott.space
+platform: Pico-8, Lua
+
+Inspired by the 1990 film and narration by Rudy Rucker. Without this, I would have not learned of the Vote rule! 

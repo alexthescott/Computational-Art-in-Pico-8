@@ -1,0 +1,22 @@
+-- memory probe 3
+-- alexthescott
+-- 9/28/21 5:15pm
+
+fc=0
+
+cls()
+::♥::
+
+fc-=0.1
+
+for i=0,1280 do
+	p=0x6000+rnd()*8192
+	poke(p,p/256+fc)
+end
+
+if fc<=-128 then
+	fc=0
+end
+
+flip()
+goto ♥

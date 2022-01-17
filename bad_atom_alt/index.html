@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html><html><!-- <= LINK TO MANIFEST (to cache files for offline-access= --><head>
+    <meta http-equiv="Content-Security-Policy" content="
+    upgrade-insecure-requests;
+    default-src
+      'none';
+    frame-src
+      'self';
+    child-src
+      'self';
+    script-src
+      'self'
+      'unsafe-inline'
+      'unsafe-eval'
+      blob:;
+    style-src
+      'self'
+      'unsafe-inline';
+    img-src
+      'self'
+      'unsafe-inline'
+      data:
+      blob:
+      https://services.tzkt.io
+      https://ipfs.infura.io
+      https://cloudflare-ipfs.com/
+      https://ipfs.io/
+      https://gateway.pinata.cloud/;
+    font-src
+      'self'
+      https://ipfs.infura.io
+      https://cloudflare-ipfs.com/
+      https://fonts.googleapis.com/
+      https://ipfs.io/
+      https://gateway.pinata.cloud/;
+    connect-src
+      'self'
+      https://better-call.dev
+      https://*.better-call.dev
+      https://*.cryptonomic-infra.tech
+      https://cryptonomic-infra.tech
+      https://*.infura.io
+      https://infura.io
+      blob:
+      ws:
+      wss:
+      bootstrap.libp2p.io
+      preload.ipfs.io
+      https://api.etherscan.io
+      https://api.thegraph.com
+      https://*.tzkt.io
+      https://api.hicdex.com
+      https://api.tzstats.com
+      https://*.wikidata.org
+      https://*.coinmarketcap.com
+      https://api.openweathermap.org
+      https://hicetnunc.xyz
+      https://*.hicetnunc.xyz;
+    manifest-src
+      'self';
+    base-uri
+      'self';
+    form-action
+      'none';
+    media-src
+      'self'
+      'unsafe-inline'
+      data:
+      blob:
+      https://ipfs.infura.io
+      https://cloudflare-ipfs.com/
+      https://ipfs.io/
+      https://gateway.pinata.cloud/;
+    prefetch-src
+      'self'
+      https://ipfs.infura.io
+      https://cloudflare-ipfs.com/
+      https://fonts.googleapis.com/
+      https://ipfs.io/
+      https://gateway.pinata.cloud/;
+    worker-src
+      'self'
+      'unsafe-inline'
+      blob:;">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!--
+    Based on https://github.com/headjump/pico8_html_template
+    You are free to remove this comment or leave it here so others may find and use the repo as well :)
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Game Title">           <!-- <= WEBAPP TITLE -->
+  <link rel="apple-touch-icon" href="icon.png">                           <!-- <= YOUR ICON -->
+  <link rel="icon" href="icon.png">                                       <!-- <= YOUR ICON -->
+  <!--
+    Icon info:
+    ----------
+    There are many different resolutions for different devices supported or recommended,
+    but I wanted this template to be easy to use "manually" and for me it works fine
+    to have a single PNG icon at 200x200. (200x200 is the minimum for facebok-sharing to use the og:image as thumbnail)
+  -->
+  <title>bad atom alt</title>                                               <!-- <= WEBSITE TITLE -->
+  <meta name="description" content="twitter.com/alexthescott">                    <!-- <= SITE DESCRIPTION as seen by web-search-engines -->
+
+  <!-- Info as seen by sharing apps like WhatsApp or Facebook, so they can show a preview-image and description when you share the URL -->
+  <meta property="og:type" content="game">
+  <meta property="og:title" content="">                                               <!-- <= GAME TITLE -->
+  <meta property="og:image" content="thumb.gif">  
+  <meta property="og:description" content="twitter.com/alexthescott">                                         <!-- <= GAME DESCRIPTION -->
+
+  <style type="text/css">
+    /* ------- DEFINE BUTTON COLORS ------- */
+    :root {
+      --btn: #1288D1;
+      --btn--pressed: #29ADFF;
+
+      --btnIcon: #ffffff;
+      --btnIcon--pressed: #d6d6d6;
+
+      --btn__analogBg: #232f37;
+    }
+    body { font-family: Verdana, Arial, sans-serif; padding: 0; margin: 0; outline: none; background: auto; overflow: hidden; }
+
+    /* ------ POSITION GAME-CANVAS ------ */
+    canvas#canvas {
+      width: min(100vh,100vw); height: min(100vh,100vw)
+      image-rendering: optimizeSpeed;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: optimize-contrast;
+      image-rendering: pixelated;
+      -ms-interpolation-mode: nearest-neighbor;
+      border: 0;
+    }
+    .canvas-wrapper { text-align: center; }
+    .canvas-wrapper canvas { margin: 0 auto; }    /* center game */
+
+  </style>
+
+</head>
+
+<body ontouchstart="Module.pico8Reset();" onmousedown="Module.pico8Reset();">
+
+<div class="canvas-wrapper">
+  <canvas class="emscripten" id="canvas"></canvas>
+</div>
+
+<div>
+  <script type="text/javascript">
+    // ------ SETUP USED FOR PICO8 CART ------
+    var
+      canvas = document.getElementById("canvas"),
+      Module = {canvas: canvas};
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  </script>
+
+  <script async="" type="text/javascript" src="bad_atom_alt.js"></script>       <!-- <= INCLUDES YOUR cart.js FILE -->
+</div>
+
+</body></html>

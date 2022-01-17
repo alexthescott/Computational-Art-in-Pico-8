@@ -1,0 +1,8 @@
+Eight one dimensional, and eight two dimensional Langton's ants battle for space in a tiny box. Z or X will speed up the step count of the program. Written and debugged in Pico-8.
+
+creator: Alex Scott
+source: https://pastebin.com/RCG3U81n
+date: 2022-1-6 2:18pm
+twitter: @alexthescott
+website: alexthescott.space
+platform: Pico-8, Lua

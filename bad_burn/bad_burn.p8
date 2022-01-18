@@ -1,0 +1,429 @@
+pico-8 cartridge // http://www.pico-8.com
+version 34
+__lua__
+-- bad burn
+-- alexthescott
+-- 11/22/21
+
+-- new seed every day of the year 
+srand(31*stat(81)+stat(82)) 
+
+-- bad fire
+p1={2,136,8,142,143,10,135,7}
+-- bad arctic blue
+p2={129,1,140,12,15,143,14,7}
+-- bad matrix green
+p3={129,131,3,139,11,138,135,7}
+-- bad magma
+p4={130,141,136,137,142,143,15,135}
+-- bad winter moss
+p5={129,1,131,141,140,13,6,7}
+-- bad october
+p6={128,130,132,4,137,142,9,10}
+-- bad office
+p7={128,133,141,5,13,6,15,7}
+-- bad thermal
+p8={1,131,3,139,9,10,8,14}
+-- bad jawbreaker
+p9={128,130,133,134,15,14,142,7}
+-- bad sulfur
+p10={130,136,8,137,13,140,12,7}
+
+p={p1,p2,p3,p4,p5,p6,p7,p8,p9,p10}
+c=rnd(p)
+pal(c,1)
+
+function vote(push)
+	-- vote decides pixel's val
+	-- based on neighbors
+	-- :param: push forces pos vote
+	x,y=rnd(128)\1,rnd(128)\1
+	
+	pu=pget(x,y-1)
+	pr=pget(x+1,y)
+	pd=pget(x,y+1)
+	pl=pget(x-1,y)
+	pc=pget(x,y)
+	
+	pa=push+(pu+pr+pd+pl+pc)/5
+	pset(x,y,pa)
+end
+
+function stripe()
+	-- draw a line
+	-- hori/vert
+	-- full/scattered
+	-- double_line/single_line
+	
+	hori=rnd()<0.5
+	p=rnd(128)
+	if full_line then
+		c=rnd(9)\1
+	else	
+		c=1+rnd(8)\1
+	end
+	
+	coin=rnd()<0.25
+
+	if hori then
+		if full_line then
+			if big_line and coin then
+				line(0,p,128,p,c-1)
+				line(0,p-1,128,p-1,c)
+			else
+				line(0,p,128,p,c)
+			end
+		else
+			-- not a full line
+			for x=0,50 do
+				if big_line and coin then
+					circfill(rnd(128),p,1,c)
+				elseif rnd()<0.05 then
+					-- small still gets circ
+					circfill(rnd(128),p,1,c)
+				else
+					pset(rnd(128),p,c)
+				end
+			end
+		end
+ -- vert
+	else 
+		if full_line then
+			if big_line and coin then
+				line(p,0,p,128,c)
+				line(p-1,0,p-1,128,c-1)
+			else
+				line(p,0,p,128,c)
+			end
+		else
+			-- not a full line
+			for y=0,50 do
+				if big_line and coin then
+					circfill(p,rnd(128),1,c)
+				elseif rnd()<0.05 then
+					-- small still gets circ
+					circfill(p,rnd(128),1,c)
+				else
+					pset(p,rnd(128),c)
+				end
+			end
+		end
+	end
+end
+
+function burn_v()
+	-- decide vote iteration count
+	if big_line or full_line 
+		or wideline or alt_extra_burn then
+			iter=512
+	else
+		iter=224
+	end
+	
+	if alt_extra_burn then
+		for i=0,iter do
+			vote(rnd(40)\39)
+		end
+	else
+		for i=0,iter do
+			vote(0)
+		end
+	end
+end
+
+function side_burn()
+	if flow_r and flow_r then
+		burn_c=128
+	else
+		burn_c=256
+	end
+	
+	if flow_l then
+		for i=0,burn_c do
+			x=rnd(64-(off/3072)*64)
+			y=rnd(128)\1
+			pcr=pget(x+1,y)
+			pc=pget(x,y)
+			pset(x,y,pcr)
+			pset(x-1,y,pc)
+		end
+	end
+	if flow_r then
+		for i=0,burn_c do
+			x=128-rnd((off/3072)*64)
+			y=rnd(128)\1
+			pcl=pget(x-1,y)
+			pc=pget(x,y)
+			pset(x,y,pcl)
+			pset(x+1,y,pc)
+		end
+	end
+end
+
+
+function full_flow()
+	iter=256
+	for i=1,iter do
+		x=rnd(128)\1
+		y=rnd(128)\1
+		pc=pget(x,y)
+		pcr=pget(x+slow_flow_d,y)
+		pset(x,y,pcr)
+		pset(x-slow_flow_d,y,pc)
+	end
+end
+
+--srand(31*stat(81)+stat(82))
+
+a=0
+fc=0
+-- how many frames till reset
+rnd_size=1800
+seed=rnd()*1024
+border=rnd()<0.5
+stretch=rnd()<0.5
+off=536+rnd(2536)
+big_line=rnd()<0.5
+-- 1/3 full, wide, narrow
+full_line=rnd()<0.3
+if not full_line then
+	wide_line=rnd()<0.3
+end
+-- 1/3 flow up,down,both
+flow_up=rnd()<0.5
+if not flow_up then
+	flow_down=true
+else
+	flow_down=rnd()<0.5
+end
+-- 1/3 flow left,right,both
+flow_r=rnd()<0.5
+flow_l=rnd()<0.5
+-- sparks require stretch
+sparks=rnd()<0.2 and stretch
+extra_burn=rnd()<0.5
+ext_brn_dir=-1+(rnd(2)\1)*2
+alt_extra_burn=rnd()<0.5
+mirror_left=rnd()<0.3
+slow_flow=rnd()<0.5
+if(slow_flow) slow_flow_d=1-(rnd(2)\1)*2
+flip_length=rnd_size*2
+angle_div_len=1/rnd_size
+
+cls()
+_set_fps(60)
+::♥::
+if t() <2 then
+	print("bad burn",48,64,7)
+elseif mirror_left and t()==2 then 
+	poke(0x5f2c,5)
+else
+	if not extra_burn and 
+	 big_line or full_line or 
+	 alt_extra_burn then
+			spawn_stripe=rnd()<(0.075+sin(a)+1)/2
+	else
+		spawn_stripe=rnd()<(0.25+(sin(a)+1)/2)
+	end
+	
+	if(spawn_stripe) stripe()
+	burn_v()
+	
+	fc+=1
+	
+	if fc%flip_length==0 then
+		fc=0
+	end
+	
+	a+=angle_div_len
+	
+	if a>=1 then
+		a=0
+	end
+	
+	if stretch then
+		off=536+rnd(2536)
+	end
+	
+	if flow_up then
+		memcpy(24576,24640,4096-off)
+	end if flow_down then	
+		memcpy(28672+off,28608+off,4096-off)
+	end
+	
+	if sparks then	
+		if flow_down then
+			p=0x8000-4096+off
+		else
+			p=0x6000+4096-off
+		end
+			
+		poke(p+64,peek(p))
+		poke(p+ext_brn_dir,peek(p)-0.1)
+	end
+	
+	if extra_burn then
+		for i=1,26 do
+			p=0x6000+rnd(8128)\1
+			c=0
+			if(rnd()<0.25)c=1
+			if peek(p)>0 then
+				poke(p+ext_brn_dir,peek(p)+c)
+				poke(p-64,peek(p)+c)
+				poke(p+64,peek(p)+c)
+			end
+		end
+	end
+	
+	side_burn()
+	
+	if(slow_flow) full_flow()
+	
+	if border then
+		rect(0,0,127,127,4)
+	end
+
+	if btn(❎) or btn(🅾️) then
+		--lol
+	else
+		flip()
+	end
+end
+goto ♥
+__gfx__
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00700700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00077000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00077000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00700700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+__label__
+55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+55555t55lllltllllltllll5l5lllllltlttllllllllttttttlll555555ttt5555ttt555555lllttttttllllllllttltllllll5l5lllltllllltllll55t55555
+555555gggllllgggggggggl5llllgllllltltllllglggggtllllgtdt5tttttttttttttt5tdtglllltgggglglllltltlllllgllll5lgggggggggllllggg555555
+555567dllllgggglttgggggggggggggttllllllggggggglglgggg57tt5ttttlllltttt5tt75gggglglgggggggllllllttgggggggggggggttlgggglllld765555
+5dddd666dlggggglllgggggggggglgggggltllglggllggglggglt755llltltlllltltlll557tlggglgggllgglglltlggggglgggggggggglllgggggld666dddd5
+5lllltt55gggttlgggggggggggglglllllllllgg6666tglgggggt55tttgggglgglggggttt55tggggglgt6666gglllllllllglgggggggggggglttggg55ttllll5
+5ttttt666tltltlglggggggggt65d5t5tlllltllgt66glggggggl6dtttgllllllllllgtttd6lgggggglg66tglltllllt5t5d56tgggggggglgltltlt666ttttt5
+5glddddddtltllgggggggggggglldd5dttlllllgggllglglgggggt7ggglgggllllggglggg7tggggglglgllggglllllttd5ddllgggggggggggglltltddddddlg5
+5tltlttttltllllllgggggggggglltltlllllllgggggglgddtglggggglgggggggggggglggggglgtddglggggggllllllltltllgggggggggglllllltlttttltlt5
+5llllttttlllttlgllgggggglg5lgggglllllllggggggggttlggggggggglgggggggglggggggggglttgggggggglllllllggggl5glggggggllglttlllttttllll5
+5l5ttlllllltlllggggllggggllllgggggggggggggggggggggggglgggggggggggggggggggglggggggggggggggggggggggggllllggggllggggllltlllllltt5l5
+55t5555tllllllllgglggggglgllgggggggggllgllgggggglggggdtlglgggggggggggglgltdgggglggggggllgllgggggggggllglggggglggllllllllt5555t55
+5dddd555tllllltltllllllllglglglllggggggggggglggggtl577llllllggggggggllllll775ltgggglggggggggggglllglglglllllllltltlllllt555dddd5
+5t555ddd5llgllllttlllllgglllgl5t5tttlgggglggggggg5tttdtllltlggggggggltllltdttt5ggggggglgggglttt5t5lglllgglllllttllllgll5ddd555t5
+5ttttt5tlggglttttllltltlllllllltllttttlgggggtgllldlll7lllllgggllllggglllll7llldlllgtggggglttttlltlllllllltltlllttttlggglt5ttttt5
+5lll55tllggggggggglgglllllllllllllltttlllggglgttggggllllllllggggggggllllllllggggttglgggllltttllllllllllllllgglgggggggggllt55lll5
+5ggglllllllgggggggggglllgglllllttllld5lllllglgggggtttllllgggggggggggggglllltttggggglglllll5dlllttlllllgglllgggggggggglllllllggg5
+5gll5llgggglllggggggggllggggtddllllt55dttltllllgggglltggggggggggggggggggggtllgggglllltlttd55tllllddtggggllgggggggglllggggll5llg5
+5ttlttttggggggggggggggglggggdtttt555dtlllllllgggggggltlggggggggggggggggggltlgggggggllllllltd555ttttdgggglgggggggggggggggttttltt5
+5llllllggggggggggggggglgggggddtttttlllllllltlglgggggg5gggggggggggggggggggg5gggggglgltlllllllltttttddggggglgggggggggggggggllllll5
+5lggllggggggggggglgggggggggglt55tttlttllddllllllllt77dlgllllggggggggllllgld77tllllllllddllttlttt55tlgggggggggglgggggggggggllggl5
+5gggggglgggggggglllgggggggtll5ttttttlllgltllldddtllllglgggggggggggggggggglglllltdddllltlgllltttttt5lltggggggglllgggggggglgggggg5
+5gggggglglggggggglgggggggggllllltlllt5tlllllltddtlgggdgglgggggllllggggglggdgggltddtllllllt5tllltlllllggggggggglggggggglglgggggg5
+5gglgggllgggggggggggggtgggtllttlll5ttttltltttdddddllgd7llllllggllggllllll7dglldddddtttltltttt5lllttlltgggtgggggggggggggllggglgg5
+5ggggggggggggggglggggglgtggllllllllllll5555dddddd5tl555tlllllggllgglllllt555lt5dddddd5555llllllllllllggtglggggglggggggggggggggg5
+5ggggggggggggggggggggtggltttttllllllltlld555dd5ddtttllt55tllllddddllllt55tlltttdd5dd555dlltllllllltttttlggtgggggggggggggggggggg5
+5ggggggggggllgggggggggglt5555tt5llllttgglltttd5dd5tgglggdtttlllllllltttdgglggt5dd5dtttllggttllll5tt5555tlggggggggggllgggggggggg5
+5ggggggglllgltgggggggggglllttttllllltt5llllllgttt5dglgg5tttdllgggglldttt5gglgd5tttgllllll5ttlllllttttlllggggggggggtlglllggggggg5
+5llllllllttgggtgggggggglllllltlllllttlltlllggllgggglggllllllggggggggllllllgglggggllggllltllttllllltllllllggggggggtgggttllllllll5
+5ddtttddggggggggggggggllllt5ttttlllllllggglgglttggggglgggltllgggggglltlggglgggggttlgglgggllllllltttt5tllllggggggggggggggddtttdd5
+5tt5555tttllgggggggggllllllttdllllllllggggggggglgglltllllllllgggggglllllllltllgglggggggggglllllllldttllllllgggggggggllttt5555tt5
+5lllltlllllltllggggglllltlllld655lttllllgggggggggttttttt5tllgggllgggllt5tttttttgggggggggllllttl556dlllltllllggggglltlllllltllll5
+5lddddlll5t5tltlll5tl5lllltttt5tddtlllt6tggggggglttt6tttttllggggggggllttttt6tttlgggggggt6tllltddt5ttttllll5lt5llltlt5t5lllddddl5
+5tgttttglgggtlglll5lgllltgtllllgt5tllttgggggddd5dtgl7tttlllllllgglllllllttt7lgtd5dddgggggttllt5tglllltgtlllgl5lllgltggglgttttgt5
+5gggggggggggggggllgglllggggllllggll5ggggggglggttdtdttggtlggtggggggggtggltggttdtdttgglggggggg5llggllllgggglllggllggggggggggggggg5
+5ggggggggggggggtlllggggggglllllggt55gllgglglglltdtgggtggggggllllllllggggggtgggtdtllglglggllg55tgglllllgggggggllltgggggggggggggg5
+5gggggggggggglglllgggggglggllggglt555t55glglgggttlggtgglgllllllllllllllglggtgglttggglglg55t555tlgggllgglgggggglllglgggggggggggg5
+5ggggggggggggggggggggggggggllttlllttlldddtgggggld5lglggggllllllllllllllgggglgl5dlgggggtdddllttlllttllgggggggggggggggggggggggggg5
+5gggggggggggggggggggggggggg65555lggtlllllggggggglt5tttgllllllllllllllllllgttt5tlgggggggllllltggl55556gggggggggggggggggggggggggg5
+5ggggglggggggggggggggggggggggllllglllggttgggggg55llllgllllllllggggllllllllgllll55ggggggttgglllgllllgggggggggggggggggggggglggggg5
+5glgggggggggggggggggggglggglgggggggtggllgggggggggg5glllgggllllggggllllggglllg5ggggggggggllggtggggggglggglgggggggggggggggggggglg5
+5ggggggggggggggggggggggggggggglggglllllggglggggg5tlgggggggttllllllllttggggggglt5ggggglggglllllggglggggggggggggggggggggggggggggg5
+5lgllgggglggggglgggggggggggggggggglllttggggggggggggllltll5tttlttttlttt5lltlllggggggggggggttlllgggggggggggggggggglggggglggggllgl5
+5lgllllgglgltllllllllllggddlllllltlltllggggggggggglllllltttlttllllttltttllllllggggggggggglltlltllllllddgglllllllllltlglggllllgl5
+5llllttgglllllttlltdttdgglllggggllllllgggggggggggggglltttttlttlttlttltttttllggggggggggggggllllllgggglllggdttdtllttlllllggttllll5
+5lllllllllllttltttttllllllggglllglllllggllglggggglltdddd5lllttttttttlll5ddddtllggggglgllgglllllglllggglllllltttttlttlllllllllll5
+5llllgglllllgglggggggglllllldtllllllgggglgggggggllt7d5595lltll5tt5lltll5955d7tllggggggglgggglllllltdllllllggggggglgglllllggllll5
+5gggggllllllgggggggggggllgggggggggggglllgggllllggggt59995ggggg5555ggggg59995tggggllllggglllggggggggggggllgggggggggggllllllggggg5
+5gggggggggggggggggggggggggggggggggggglltlggggglgggggll95gllglggllgglgllg59llggggglgggggltllgggggggggggggggggggggggggggggggggggg5
+5ggggggggllllggggggggggtlggggggglllgltttt5llggggggggll5tlltlt5gllg5tltllt5llggggggggll5ttttlglllgggggggltggggggggggllllgggggggg5
+5llllllllllllllgggglgggtttllgtt5llllltttttt5glttggtt5667dtttt5t55t5ttttd7665ttggttlg5ttttttlllll5ttglltttggglggggllllllllllllll5
+5ld55dtttt55d7llgggglggttd5lllt5t5tttttttt557gd6d66tt596dtdtt799997ttdtd695tt66d6dg755tttttttt5t5tlll5dttgglggggll7d55ttttd55dl5
+5dd6d6d55777f7555glggg55577dd7t55tt55777d55d7776667d55769677d777777d77696755d7666777d55d77755tt55t7dd77555ggglg5557f77755d6d6dd5
+5dddd5tllll7dlttttggggggggtddlll555tl75lttt575g7555tt7967d7d5t6666t5d7d7697tt5557g575tttl57lt555lllddtggggggggttttld7llllt5dddd5
+5tlllllgggllltttttlgggggggggtt5dtlggglgggggltlttlglgt666d55555tttt55555d666tglglttltlggggglgggltd5ttgggggggggltttttlllggglllllt5
+5ggggllgggggll555tgggllllgdd55tllgggglgggggglglggggll555lttt5lggggl5tttl555llgggglglgggggglggggllt55ddgllllgggt555llgggggllgggg5
+5ttttttlglggggggggggggglggggggggggggggggggggglllggggll55ttggggggggggggtt55llgggglllggggggggggggggggggggglggggggggggggglgltttttt5
+5d5llllgggggggggggggggggggggdggdggggggllggggggglgglgt7765dddggggggggddd5677tglgglgggggggllggggggdggdgggggggggggggggggggggllll5d5
+5llllgggggggggggggggggggggggldllgggllgtlltlgggglgggggg7d5ddtgggllgggtdd5d7gggggglggggltlltgllggglldlgggggggggggggggggggggggllll5
+5ggggggggggggggggggggggggggggldlgglglgggggggggtttttlggllt5lggggggggggl5tllggltttttggggggggglglggldlgggggggggggggggggggggggggggg5
+5gggggglgggggggggggggggglglllltlggglgglggggggggtdddglllglllgggggggggglllglllgdddtgggggggglgglgggltllllglgggggggggggggggglgggggg5
+5gggglggggggllgggggggggggggglltggllllgllllggggddd5ddddt5555llggggggll5555tdddd5dddggggllllgllllggtllggggggggggggggllgggggglgggg5
+5gggglglgglllggggggggggggllllggggggglggggllgggg555dlg57ttdtggggggggggtdtt75gld555ggggllgggglgggggggllllgggggggggggglllgglglgggg5
+5lllgllgggggggggggggggggggldtllgggggggggggggglt5lddggttggggtggllllggtggggttggddl5tlgggggggggggggglltdlgggggggggggggggggggllglll5
+5llllgglggggggggggggggglggld5dlgggggggggggggggtd5ld7775lggggggggggggggggl5777dl5dtgggggggggggggggld5dlgglggggggggggggggglggllll5
+5gllgggggggggggggggggggggggllglllgggggggggglglggdltddd6tggggggggggggggggt6dddtldgglglgggggggggglllgllgggggggggggggggggggggggllg5
+5ggggggggggggglggggllggglggglgggggggggggggggggggggllll5lggggglgggglgggggl5llllggggggggggggggggggggglggglgggllgggglggggggggggggg5
+5tttttggggggllggggllglgggggglltglllglgglgggglgggggggggggggggggllllggggggggggggggggglgggglgglglllgtllgggggglgllggggllggggggttttt5
+5dgdtgggggttgllgggggggggggggllgglgdtdllggggggggggggggggggggll5gggg5llgggggggggggggggggggglldtdglggllgggggggggggggllgttgggggtdgd5
+5ddttttlllglllltggggggggggggggtgttttgggllgggggtttlgt59dllglgggtlltggglglld95tgltttgggggllgggttttgtggggggggggggggtllllglllttttdd5
+5ggggt665555ggggggggggggggggg55dllllggggglllgggllttt76d56dgggglgglggggd65d67tttllggglllggggglllld55ggggggggggggggggg555566tgggg5
+5ggttt66665gggggggggggggggggglttlgggggllll5lll5tlltt56ddggggglgggglgggggdd65ttllt5lll5llllggggglttlgggggggggggggggggg56666tttgg5
+5ggggg56666llgggggggggggggggggggggggggtttttd5lt55gttttglltlllgtggtgllltllgttttg55tl5dtttttgggggggggggggggggggggggggll66665ggggg5
+5gggggglggggggggggggglllgggggggggggggllt5555555tgggdddtg565tlgggggglt565gtdddgggt5555555tllggggggggggggglllggggggggggggglgggggg5
+5ggggggggggggggggggggggggggggggggggglllltt5t5666lgggd55g6d66tggggggt66d6g55dgggl6665t5ttllllggggggggggggggggggggggggggggggggggg5
+5ggggggggggggggggggggggllggggggggggggllttt5tt5dllgggd5g666665gggggg566666g5dggglld5tt5tttllggggggggggggllgggggggggggggggggggggg5
+5lggggggtggggggggggggggllglggggggggglllttl55t56dlggld5666665gggggggg5666665dlggld65t55lttlllggggggggglgllggggggggggggggtggggggl5
+5ggggggggggggggggggggggglglggllgggggttlggg5555ddgl6566d7gtt5tggggggt5ttg7d6656lgdd5555ggglttgggggllgglglggggggggggggggggggggggg5
+5ggggggtgglggggggggggggglggggggggglgtllllg5t55ddgl6td677gtlllglgglgllltg776dt6lgdd55t5glllltglggggggggglggggggggggggglggtgggggg5
+5ggggggllggggggggggggggggggglggggglgglll55tttddtgl6l6677gtllggllllgglltg7766l6lgtddttt55lllgglggggglgggggggggggggggggggllgggggg5
+5ggggggtggggggggggggggggggggggggggggglllllllggglllll566dltlllgllllgllltld665lllllggglllllllgggggggggggggggggggggggggggggtgggggg5
+5ggggggggggggggggggggggggggggggglglgggggltllgggggggl777dlggggggggggggggld777lggggggglltlggggglglggggggggggggggggggggggggggggggg5
+5gggggggggggggggggggllgggggggllllllggggglllllgggggg77777lgglgggggggglggl77777gggggglllllgggggllllllgggggggllggggggggggggggggggg5
+5ggggggggggggglllgggllgggggggglggllggglgltllllgggggg7777tllggggggggggllt7777gggggglllltlglgggllgglggggggggllggglllggggggggggggg5
+5ggggggggggggggggggggggggggggllllllggggggttl5dggggg77767tlglgggggggglglt76777gggggd5lttggggggllllllgggggggggggggggggggggggggggg5
+5gggggggggggggggggggggggggggggllgllggggggtt5ddtt5dlggtggggggggggggggggggggtggld5ttdd5ttggggggllgllggggggggggggggggggggggggggggg5
+5gggggggggggggggggggggggggggglllgggggggggg5lgggl5lggglgtggggggggggggggggtglgggl5lgggl5gggggggggglllgggggggggggggggggggggggggggg5
+5ggggggglgggggggggggggggggggglllgglggggggg5lgggt5dlggtggglgggggggggggglgggtggld5tgggl5ggggggglgglllgggggggggggggggggggglggggggg5
+5dg656t66gg6666g6lglll6ggglll6l6l6gggggg6tl6gg66ttlgg6g6g6gg6gggggg6gg6g6g6ggltt66gg6lt6gggggg6l6l6lllggg6lllgl6g6666gg66t656gd5
+5ggllggglgggggggggggglgggggggltlllgllgggllllglllttggglglgggggggggggggggglglgggttlllgllllgggllgllltlggggggglgggggggggggglgggllgg5
+5gggglgglggggggggggggglggggggltlllgllgllglllglll5tggglglgggggggggggggggglglgggt5lllglllgllgllgllltlgggggglggggggggggggglgglgggg5
+5ggggggggggggggggggggggggtglltttlllggglgglltlgldggggggggggggggggggggggggggggggggdlgltllgglgggllltttllgtgggggggggggggggggggggggg5
+5gggggggggggggggggggggggggggttttltggggllllltlgltltggltdggggllggggggllggggdtlggtltlgltlllllggggtlttttggggggggggggggggggggggggggg5
+5gglllggggggggggggggggglgggg5t5ttttgglgtlllllglt5tttdd5tgglgggggggggglggt5ddttt5tlgllllltglggtttt5t5gggglggggggggggggggggglllgg5
+5ttttttgggggggggggggglgggggld5655llgtgglllllggglt5lgttdtgggllggggggllgggtdttgl5tlggglllllggtgll5565dlggggglggggggggggggggtttttt5
+5llllgggggggggggggtgggglgggg5555tltlggglgllllglgllggglgggggggggggggggggggglgggllglgllllglgggltlt5555gggglggggtgggggggggggggllll5
+5glgtttttgggggggggggggggggtttd5t5ltltlgl5ttllglltdgttttggglgtggggggtglgggttttgdtllglltt5lgltltl5t5dtttgggggggggggggggggtttttglg5
+5ttttllttggggggggggggggggglllltltltlgtgl5ttllglltdgtttgggglgtggggggtglggggtttgdtllglltt5lgtgltltltllllgggggggggggggggggttlltttt5
+5tttlllttggggggggggggggggglllltltllggtgd555lllggtdtdt77gl66tlgtggtglt66lg77tdtdtgglll555dgtgglltltllllgggggggggggggggggttlllttt5
+5lllltllggggggggggggggllgglglltltltlltl55t5l5lgltd75576tll5ttlllllltt5llt67557dtlgl5l5t55ltlltltltllglggllgggggggggggggglltllll5
+5ttttlgggggggggglglggggglggggltltlttttggdt5llllllll5555tlllllgtggtglllllt5555llllllll5tdggttttltltlgggglggggglglggggggggggltttt5
+5ttllllltggtttgggggglggglggggggggglllgggllltlllll7d75555lllltgllllgtllll55557d7llllltlllggglllggggggggglggglggggggtttggtllllltt5
+5lttlllggggggggggggggglllglgggggltllllggllltlllllll555llllllllgllgllllllll555llllllltlllgglllltlggggglglllggggggggggggggglllttl5
+5llllgggggggggggggggggtglgggggggglgltlglllttttllllt5565lttllgggllgggllttl5655tllllttttlllgltlglgggggggglgtgggggggggggggggggllll5
+5gggggggggggggggggggttllllgggggggggllllllltttttdtllll5tllllltggggggtlllllt5lllltdtttttlllllllgggggggggllllttggggggggggggggggggg5
+5ggggggggggggggggggglllgglllgggglttllggllltltdd5tttllttlllllglgggglglllllttllttt5ddtltlllggllttlgggglllgglllggggggggggggggggggg5
+5gggggglgggggggggglglltlgglggtgttllgggggllllgggglllt555tglgggggggggggglgt555tlllggggllllgggggllttgtgglggltllglgggggggggglgggggg5
+5lllllggggggggggggggllllglllglgttltlllgggltttgggggtl7d5lgglggggllgggglggl5d7ltgggggtttlgggllltlttglglllgllllgggggggggggggglllll5
+5gggggggggggggggggtttlttllllltlltlllgggglltlggggglldd55lllggggllllgggglll55ddllgggggltllggggllltlltlllllttltttggggggggggggggggg5
+5gggggggggggggggggttlltlllltttlggllggggglttttggglggdld5llggggggllggggggll5dldgglgggttttlgggggllggltttlllltllttggggggggggggggggg5
+5gggggggggggggggggttllltlllttttggllggggglttttggglgddld5llggggggllggggggll5dlddglgggttttlgggggllggttttllltlllttggggggggggggggggg5
+5ltggggggggggggggggllglllllllgggglgggggtlllllltggldd7f65lgggggllllgggggl56f7ddlggtlllllltggggglgggglllllllgllggggggggggggggggtl5
+5lggggggllggggggggggggglllll5tlgglglggttgtltttggglll7655ggggggllllgggggg5567lllgggtttltgttgglglgglt5lllllgggggggggggggllggggggl5
+5lggggggggglgggggggggggggllltt6llggggggl5ttllggggggl7gltgggggl5ll5lgggggtlg7lgggggglltt5lggggggll6ttlllggggggggggggglgggggggggl5
+5lllglgggggggggggggggggllll555l66lgggggg55tltggggggggdtgggggggllllgggggggtdggggggggtlt55ggggggl66l555llllggggggggggggggggglglll5
+55lgggggggggggggggggggllllll5llllggggggg5tttlgggggggl755tgggggllllgggggt557lggggggglttt5gggggggllll5llllllgggggggggggggggggggl55
+5lllggggggggggggggggggglllll55glggggggggglllggggggggl7t5ttttlgtggtgltttt5t7lgggggggglllggggggggglg55lllllggggggggggggggggggglll5
+5lllllgggllllglglgllllllglttt5ddlgllllggllllggggglggtdd75655tggggggt55657ddtgglgggggllllggllllgldd5tttlgllllllglglgllllggglllll5
+5llllltttgglggggggggglgggtttt555llgllggggllllgggggttdd75555ttlggggltt55557ddttgggggllllggggllgll555ttttggglggggggggglggtttlllll5
+5tttttlttggggggggggtgggglllltlllllllllt555tggggtttll777f76655tggggt55667f777lltttggggt555tllllllllltllllggggtggggggggggttlttttt5
+55555tllggggggggggggggglggglllggltllldd5tttttgltltggg5d5ldddtggggggtdddl5d5gggtltlgttttt5ddllltlgglllggglgggggggggggggggllt55555
+5555555tgggggglglgggggggglllglggllllll55d5tttgttttlgllllt66dllgggglld66tllllglttttgttt5d55llllllgglglllgggggggglglggggggt5555555
+5l555555ggggggggggggggggglgggtltlllll55555ttglgglgggllltl66dtlggggltd66ltlllggglgglgtt55555llllltltggglggggggggggggggggg555555l5
+5tt55tttggggggggggggggggggglgllllltlll5555glggglllggglttttdd6gggggg6ddttttlggglllggglg5555llltlllllglgggggggggggggggggggttt55tt5
+5ttttttt5ggggggggggllggllggglllllttlllt5555dllggglgglttt56dd6lggggl6dd65tttlgglggglld5555tlllttlllllgggllggllgggggggggg5ttttttt5
+5llttlttttlggggggggggglgggglgllllllllt55dtggggggggggggtt6dddtggggggtddd6ttggggggggggggtd55tllllllllglgggglggggggggggglttttlttll5
+5llggg5ttgggggggggggglllgglggglllttlllll55ggggggtgggggggt5tlgggggggglt5tgggggggtgggggg55lllllttlllggglgglllggggggggggggtt5gggll5
+55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+

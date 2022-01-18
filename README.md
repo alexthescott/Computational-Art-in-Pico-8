@@ -15,3 +15,5 @@
 [<img src='./bad_drain/bad_drain.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_drain)
 [<img src='./bad_drain_alt/bad_drain_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_drain_alt)
 [<img src='./bad_drip/bad_drip.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_drip)
+[<img src='./bad_fidget/bad_fidget.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_fidget)
+[<img src='./bad_fidget_alt/bad_fidget_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_fidget_alt)

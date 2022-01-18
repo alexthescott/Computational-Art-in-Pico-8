@@ -3,7 +3,7 @@
 <img src='bad_carwash.gif'></img>
 <img src='bad_carwash.png'></img>
 
-[bad carwash ipfs]()
+[bad carwash ipfs](https://gateway.fxhash2.xyz/ipfs/QmT1qoRmfQYBZT5moskGkWKS9xBhj65mpHB79UoWxKcvsx/?fxhash=oo2zCt3f6m3DcgLzmiYv4WJdbcTDJ9exVqsQtcJ1qmcgxfYTNKv)
 
 ``` Lua
 -- bad carwash

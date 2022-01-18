@@ -28,3 +28,6 @@
 [<img src='./bad_slant/bad_slant.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_slant)
 [<img src='./bad_snakes/bad_snakes.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_snakes)
 [<img src='./bad_snakes_alt/bad_snakes_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_snakes_alt)
+[<img src='./block_cloud/block_cloud.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/block_cloud)
+[<img src='./block_cloud_alt/block_cloud_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/block_cloud_alt)
+[<img src='./cosine_river/cosine_river.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/cosine_river)

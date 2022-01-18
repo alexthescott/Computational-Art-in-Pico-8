@@ -23,3 +23,5 @@
 [<img src='./bad_plastic/bad_plastic.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_plastic)
 [<img src='./bad_portal/bad_portal.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_portal)
 [<img src='./bad_portal_alt/bad_portal_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_portal_alt)
+[<img src='./bad_radar/bad_radar.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_radar)
+[<img src='./bad_radar_alt/bad_radar_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_radar_alt)

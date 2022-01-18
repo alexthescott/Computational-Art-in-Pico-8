@@ -26,3 +26,5 @@
 [<img src='./bad_radar/bad_radar.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_radar)
 [<img src='./bad_radar_alt/bad_radar_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_radar_alt)
 [<img src='./bad_slant/bad_slant.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_slant)
+[<img src='./bad_snakes/bad_snakes.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_snakes)
+[<img src='./bad_snakes_alt/bad_snakes_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_snakes_alt)

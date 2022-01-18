@@ -18,3 +18,5 @@
 [<img src='./bad_fidget/bad_fidget.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_fidget)
 [<img src='./bad_fidget_alt/bad_fidget_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_fidget_alt)
 [<img src='./bad_fireworks/bad_fireworks.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_fireworks)
+[<img src='./bad_fireworks_alt/bad_fireworks_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_fireworks_alt)
+[<img src='./bad_flow/bad_flow.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_flow)

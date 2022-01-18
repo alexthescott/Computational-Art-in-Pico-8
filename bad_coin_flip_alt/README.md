@@ -1,0 +1,82 @@
+<h1>bad coin flip alt</h1>
+
+<img src='bad_coin_flip_alt.gif'></img>
+<img src='bad_coin_flip_alt.png'></img>
+
+[bad coin flip alt ipfs](https://cloudflare-ipfs.com/ipfs/QmdZAZGBtv8RG9CRKqeCknnA8CqfNKnZKmiiix3XbPc1D4/)
+
+``` Lua
+-- bad coin flip alt
+-- alexthescott 
+-- 8/23/21
+
+t=0
+pa={8,136,152,2}
+pal(pa,1)
+cls(7)
+c=2
+b=-1
+
+::♥::
+if time()<2 then
+	print("bad coin flip alt",30,64,0)
+else
+	-- big circle
+	ovalfill(15,15,112,112,c-1)
+	
+	-- burn pixels
+	if b==1 then
+		nc=7
+		bc=0
+	else
+		nc=0
+		bc=7
+	end
+	for p=0,2048 do
+		x=rnd(128)
+		y=rnd(128)
+		pc=pget(x,y)
+		if pc==nc then
+			pset(x,y,6)
+		elseif pc==6 then
+			pset(x,y,bc)
+		end
+	end
+	
+	--little circle
+	ovalfill(31,31,96,96,c)
+	
+	--oscillating ovals
+	for i=1, 8 do
+		s=i*32
+		p=s/2*(1+cos(t+i/25))/2
+		if b == 1 then
+			oval(64+p,0+s/2,64-p,127-s/2,7)
+			oval(0+s/2,64+p,127-s/2,64-p)
+		else 
+			oval(64+p,0+s/2,64-p,127-s/2,0)
+			oval(0+s/2,64+p,127-s/2,64-p,0)
+		end
+	end
+	t+=0.005
+	
+	--color change if l,r btn press
+	if btnp(0) then
+		c-=1
+	elseif btnp(1) then
+		c+=1
+	end
+	if c==0 then
+		c=#pa
+		b*=-1
+	elseif c==#pa+1 then
+		c=2
+		b*=-1
+	end
+	
+	--goto considered harmful?!
+	--not in this case dijkstra
+	flip()
+end
+goto ♥
+```

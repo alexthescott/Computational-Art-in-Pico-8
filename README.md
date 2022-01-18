@@ -10,3 +10,5 @@
 [<img src='./bad_burn/bad_burn.png'></img>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_burn)
 [<img src='./bad_burnt_pixel/bad_burnt_pixel.png'></img>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_burnt_pixel)
 [<img src='./bad_carwash/bad_carwash.png'></img>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_carwash)
+[<img src='./bad_coin_flip/bad_coin_flip.png'></img>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_coin_flip)
+[<img src='./bad_coin_flip_alt/bad_coin_flip_alt.png'></img>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_coin_flip_alt)

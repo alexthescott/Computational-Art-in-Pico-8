@@ -1,168 +1,177 @@
 <h1>bad marble</h1>
 
-<img src='block_cloud_alt.gif'></img>
-<img src='block_cloud_alt.png'></img>
+<img src='bad_marble.gif'></img>
+<img src='bad_marble.png'></img>
 
-[block cloud alt ipfs](https://cloudflare-ipfs.com/ipfs/QmXxWaXMUtbmJQdhhb6RXg5CPi9p6ApFGwJoL4gU7Rq82d/)
+[bad marble ipfs](https://bafybeige2hmuev6hitvhodaiuuh4mrn4vexwsemcrreaxbvnhr5y3yzfva.ipfs.infura-ipfs.io/)
 
 ``` Lua
--- block cloud alt
+-- bad marble
 -- alexthescott
--- 8/19/21
+-- 21/1/19
 
-p={7,6,1,13,5,129,141,133,130}
-pal(p,1)
+-- scholastic green
+p1={[0]=129,131,138}
+-- icky thump red
+p2={[0]=1,8,7}
+-- gameboy green
+p3={[0]=138,135,139}
+-- vein red
+p4={[0]=130,2,136}
+-- marble velvet
+p5={[0]=141,13,6}
+-- moonlit blue
+p6={[0]=0,129,13}
+-- mild acid green
+p7={[0]=131,3,139}
+-- sunkist orange
+p8={[0]=135,137,10}
 
-function new_vert()
-	local v={}
-	v.w=10*(2+rnd(2))\1
-	v.h=10*(2+rnd(2))\1
-	v.x=rnd(127)\1
-	v.c=rnd(3)\1
-	v.f=rnd(2)\1
-	if v.f==0 then
-		v.y=0-v.h
-	else
-		v.y=127+v.h
-	end
-	
-	v.draw=function(s)
-		for x=s.x, s.x+s.w do
-				if x%(2+v.c*2)==0 then
-					if v.c==0then
-						c=1
-					elseif v.c==1then
-						c=4
-					else
-						c=7
-					end
-			 	line(x,s.y,x,s.y+s.h,c)
-				end
+-- new seed every day of the year 
+srand(31*stat(81)+stat(82)) 
+
+p={p1,p2,p3,p4,p5,p6,p7,p8}
+c=rnd(p)
+pal(c,1)
+
+s=rnd(-1)
+fc=0
+fm=4096
+
+var1=rnd()
+var2=rnd()
+srand(s)
+
+function bad_square_burn()
+	for i=1,34 do
+		x=(rnd(16)\1)*8
+		y=(rnd(16)\1)*8
+		if x!=0 and x!=120 then
+			x+=(rnd(min(x,128-x,4))\1)-2
+		end
+		if y!=0 and y!=120 then
+			y+=(rnd(min(y,128-y,4))\1)-2
+		end
+		
+		for i=1,20 do
+			rx=x+rnd(8)\1
+			ry=y+rnd(8)\1
+			v=get_score(rx,ry)
+			pset(rx,ry,v)
 		end
 	end
-	
-	v.update=function(s)
-		if s.f==0 then
-			s.y+=1
-		else
-			s.y-=1
+end	
+
+function good_square_burn()
+	for i=1,34 do
+		x=(rnd(16)\1)*8
+		y=(rnd(16)\1)*8
+		
+		for i=1,20 do
+			rx=x+rnd(8)\1
+			ry=y+rnd(8)\1
+			v=get_score(rx,ry)
+			pset(rx,ry,v)
 		end
 	end
-	
-	return v
 end
 
-function new_hori()
-	local h={}
-	h.w=10*(2+rnd(2))\1
-	h.h=10*(2+rnd(2))\1
-	h.y=rnd(127)\1
-	h.c=rnd(3)\1
-	h.f=rnd(2)\1
-	if h.f==0 then
-		h.x=0-h.w
-	else
-		h.x=127+h.w
-	end
-	
-	h.draw=function(s)
-		for y=s.y, s.y+s.h do
-				if y%2==0 then
-					if h.c==0then
-						c=1
-					elseif h.c==1then
-						c=4
-					else
-						c=7
-					end
-			 	line(s.x,y,s.x+s.w,y,c)
-				end
+function good_byte_square()
+	for i=1,14 do
+		x=(rnd(16)\1)*8
+		y=(rnd(16)\1)*8
+		for rx=x,x+7 do
+			for ry=y,y+7 do
+				v=get_score(rx,ry)
+				pset(rx,ry,v)
+			end
 		end
 	end
-	
-	h.update=function(s)
-		if s.f==0 then
-			s.x+=1
-		else
-			s.x-=1
+end
+
+function perfect_byte_square()
+	for i=1,14 do
+		x=(rnd(16)\1)*8
+		y=(rnd(16)\1)*8
+		if x!=0 and x!=120 then
+			x+=(rnd(min(x,128-x,4))\1)-2
+		end
+		if y!=0 and y!=120 then
+			y+=(rnd(min(y,128-y,4))\1)-2
+		end
+		
+		for rx=x,x+7 do
+			for ry=y,y+7 do
+				v=get_score(rx,ry)
+				pset(rx,ry,v)
+			end
 		end
 	end
-	
-	return h
 end
 
-function new_clear()
-	local clr={}
-	clr.i=1
-	
-	clr.update=function(s)
-		s.i+=1
+function perfect_scan()
+	for i=1,7 do
+		p=-1+rnd(129)
+		for y=p,p+1 do
+			for x=p%2,127,2 do
+				v=get_score(x,y)
+				pset(x,y,v)
+			end
+		end
 	end
-	
-	clr.draw=function(s)
-		line(s.i,0,0,s.i,0)
-		line(256-s.i,0,0,256-s.i,0)
-	end
-	
-	clr.destroy=function(s)
-		return s.i>=256
-	end
-	
-	return clr
 end
 
-swipe={}
-blob={}
-add(blob,new_vert())
-add(blob,new_hori())
+ripple_amp=32*var2
+function get_score(x,y)
+	v=1
+	t=fc/fm
+	v1=(1+cos(var1+y/128))/2
+	v2=(1+sin(t+(var1+x/512)))/2
+	v3=(1+cos(v1*v2+t^2))/2
+	v4=(1+sin(v1+v2-t))/2
+	v+=(x/ripple_amp*(v2+v2+v3+v4))
+	if(v%3<1 and ((x%4==0 and y%2==0) or (x%4==1 and y%2==1)))v+=1
+	return v%3
+end
 
-timer=0.03125
+vard=rnd(5)\1
+cls(1)
+_set_fps(60)
 
-cls(0)
+
+month=stat(81)
+day=stat(82)
+
+cls(1)
 ::♥::
-if t()<2 then
-	print("block cloud alt",34,64,1)
+if time()<2 then
+	print("bad marble",44,59,2)
+	print(month.."/"..day,55,65)
 else
-	--burn pixels
-	for c=0, 1024 do 
-		local x=rnd(128)
-		local y=rnd(128)
-		local f=pget(x,y)
-		if f%3>0 then
-	 	pset(x,y,f+1)
-	 end
+	if vard==0 then
+		perfect_scan()
+	elseif vard==1 then
+	 good_square_burn()
+	elseif vard==2 then
+	 perfect_byte_square()
+	elseif vard==3 then
+	 good_byte_square()
+	elseif vard==4 then
+	 bad_square_burn()
+	end
+	fc+=1
+	
+	if fc>=fm then
+		fc=0
+		srand(s)
 	end
 	
-	if t()%60==0or btn(5) or btn(4) then
-		add(swipe,new_clear())
-	end
-	
-	for clr in all(swipe) do
-		clr:draw()
-		clr:update()
-		if clr:destroy() then
-			del(swipe,clr)
-		end
-	end
-	
-	for b in all(blob) do
-		b:draw()
-		b:update()
-		if b.f==0 then
-			if b.x>=128 or b.y>=128 then
-				del(blob,b)
-			end
+	for i=0,fc/fm*128,1 do
+		if i%2==0 then
+			pset(0,i,1)
 		else
-			if b.x<=0-b.w or b.y<=0-b.h then
-				del(blob,b)
-			end
+			pset(1,i,1)
 		end
-	end
-	
-	if time()%timer==0 then
-		add(blob,new_hori())
-		add(blob,new_vert())
-		timer=(1+rnd(2))\1
 	end
 end
 flip()

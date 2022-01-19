@@ -31,3 +31,6 @@
 [<img src='./block_cloud/block_cloud.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/block_cloud)
 [<img src='./block_cloud_alt/block_cloud_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/block_cloud_alt)
 [<img src='./cosine_river/cosine_river.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/cosine_river)
+[<img src='./digital_dash/digital_dash.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/digital_dash)
+[<img src='./fuzzy_walk/fuzzy_walk.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/fuzzy_walk)
+[<img src='./fuzzy_walk_alt/fuzzy_walk_alt.png'/>](https://github.com/alexthescott/Computational-Art-fuzzy_walk_alt-Pico-8/tree/main/fuzzy_walk_alt)

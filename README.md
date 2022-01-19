@@ -34,3 +34,7 @@
 [<img src='./digital_dash/digital_dash.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/digital_dash)
 [<img src='./fuzzy_walk/fuzzy_walk.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/fuzzy_walk)
 [<img src='./fuzzy_walk_alt/fuzzy_walk_alt.png'/>](https://github.com/alexthescott/Computational-Art-fuzzy_walk_alt-Pico-8/tree/main/fuzzy_walk_alt)
+[<img src='./horizontal_burn/horizontal_burn.png'/>](https://github.com/alexthescott/Computational-Art-fuzzy_walk_alt-Pico-8/tree/main/horizontal_burn)
+[<img src='./horizontal_burn_alt/horizontal_burn_alt.png'/>](https://github.com/alexthescott/Computational-Art-fuzzy_walk_alt-Pico-8/tree/main/horizontal_burn_alt)
+[<img src='./its_a_feature/its_a_feature.png'/>](https://github.com/alexthescott/Computational-Art-fuzzy_walk_alt-Pico-8/tree/main/its_a_feature)
+[<img src='./its_a_feature_2/its_a_feature_2.png'/>](https://github.com/alexthescott/Computational-Art-fuzzy_walk_alt-Pico-8/tree/main/its_a_feature_2)

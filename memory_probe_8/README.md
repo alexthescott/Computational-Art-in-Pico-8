@@ -1,0 +1,146 @@
+<h1>memory probe 8</h1>
+
+<img src='memory_probe_8.gif'></img>
+<img src='memory_probe_8.png'></img>
+
+[memory probe 8 ipfs])
+
+``` Lua
+-- memory probe 8
+-- alexthescott
+-- 10/15/21 6:55am
+
+-- new seed every day of the year 
+srand(31*stat(81)+stat(82)) 
+
+p1={7,6,15,143,4,141,13,134,5,133,2,1,130,128,129,0}
+p2={7,135,143,14,9,142,137,8,136,2,134,4,132,133,130,0}
+p3={7,6,134,13,12,2,141,5,140,131,1,129,133,130,128,0}
+
+p={p1,p2,p3}
+c=p[1+rnd(#p)\1]
+
+pal(c,1)
+
+flip_drip=rnd(2)\1
+orb_dir=0==rnd(2)\1
+
+function new_object(t,v)
+	o={}
+	o.v=v
+	o.t=t
+	if orb_dir then
+		o.x=64+cos(o.t/o.v)*64
+		o.y=64+sin(o.t)*64
+	else
+		o.x=64+cos(o.t)*64
+		o.y=64+sin(o.t/o.v)*64
+	end
+	
+	o.draw=function(self)
+		local r=8
+		local rx=r/2-rnd(r)
+		local ry=r/2-rnd(r)
+		local x=self.x+rx
+		local y=self.y+ry
+		circfill(x,y,r/4,7)
+	end
+	
+	o.update=function(self)
+		if orb_dir then
+			self.x=64+cos(self.t/self.v)*64
+			self.y=64+sin(self.t)*64
+		else
+			self.x=64+cos(self.t)*64
+			self.y=64+sin(self.t/self.v)*64
+		end
+		
+		self.t+=0.0025
+	end
+	
+	return o
+end
+
+function burn()
+	cnt=800
+	if flip_drip==0 then
+		for i=1,cnt do
+			p=0x6000+rnd(4224)\1
+			poke(p-64,peek(p)-1)
+		end
+		
+		for i=1,cnt do
+			p=0x7000+rnd(4032)\1
+			poke(p+64,peek(p)-1)
+		end
+	else
+		for i=1,cnt do
+			p=0x6000+rnd(4224)\1
+			poke(p+64,peek(p)-1)
+		end
+		
+		for i=1,cnt do
+			p=0x7000+rnd(4032)\1
+			poke(p-64,peek(p)-1)
+		end
+	end
+end
+
+function forward()
+	v=c[1]
+	del(c,v)
+	c[#c+1]=v
+	pal(c,1)
+end
+
+function backward()
+	v=c[#c]
+	del(c,v)
+	for i=#c+1,1,-1 do
+		if i!=1 then
+			c[i]=c[i-1]
+		else
+			c[i]=v
+		end
+	end
+	pal(c,1)
+end
+
+for i=1,rnd()*16 do
+	forward()
+end
+
+objs={}
+v=1+rnd()*5
+for i=1,100 do
+add(objs,new_object(i/75,v))
+end
+
+month=stat(81)
+day=stat(82)
+
+cls()
+_set_fps(60)
+::♥::
+if t()<2 then
+	print("memory probe 8",36,59,1)
+	print(month.."/"..day,55,65)
+else
+	burn()
+	
+	for o in all(objs) do
+		o:draw()
+		o:update()
+	end
+	
+	if btnp(⬆️) or btnp(⬅️) then
+		forward()
+	end
+			
+	if btnp(⬇️) or btnp(➡️) then
+		backward()
+	end
+end	
+flip()
+goto ♥
+```

@@ -1,0 +1,172 @@
+<h1>random walk ii alt</h1>
+
+<img src='random_walk_ii_alt.gif'></img>
+<img src='random_walk_ii_alt.png'></img>
+
+[random walk ii alt ipfs](https://cloudflare-ipfs.com/ipfs/Qmd5aZtodCB44zRz9o6Zn8RdPZN7DzRpcMJN1r1BAPp77R/)
+
+``` Lua
+-- random walk ii alt
+-- alexthescott
+-- 9/27/21 7:34pm
+
+-- new seed every day of the year
+srand(31*stat(81)+stat(82))
+
+--b&w or w&b
+if rnd()<0.5 then
+	pal({0,7},1)
+else
+	pal({7,0},1)
+end
+
+function new_obj(x,y)
+	obj={}
+	obj.points={}
+	obj.points[1]={x=x,y=y}
+	obj.points[2]={x=x+6,y=y}
+	obj.points[3]={x=x+6,y=y+6}
+	obj.points[4]={x=x,y=y+6}
+	obj.a=0
+	
+	obj.draw=function(self)
+		local p=self.points
+		if obj.a==0 then
+			line(p[1].x,p[1].y,p[2].x,p[2].y,1)
+			line(p[2].x,p[2].y,p[3].x,p[3].y,1)
+			line(p[3].x,p[3].y,p[4].x,p[4].y,1)
+			line(p[4].x,p[4].y,p[1].x,p[1].y,1)
+		else
+		local p=p[1]
+			rectfill(p.x,p.y,p.x+6,p.y+6,1)
+		end
+	end
+	
+	obj.set_off=function()
+		obj.a=0
+	end
+	
+	obj.set_on=function()
+		obj.a=0.5
+	end
+	
+	return obj
+end
+
+function new_grid()
+	grid={}
+	grid.objs={}
+	grid.point={x=1+rnd(16)\1,y=1+rnd(16)\1}
+	grid.temp_p={x=-1,y=-1}
+	for x=1,15 do
+		row={}
+		for y=1,15 do
+			local nx=2+(x-1)*9
+			local ny=2+(y-1)*9
+			add(row,new_obj(nx,ny))
+		end
+		 add(grid.objs,row)
+	end
+	
+	grid.draw=function(self)
+		local p=self.point
+		local spot=self.objs[p.x][p.y]
+		
+		local x=1
+		for row in all(self.objs) do
+			local y=1
+			for obj in all(row) do
+				if (self.point.x==x and
+					self.point.y==y) or
+					(self.temp_p.x==x and
+					self.temp_p.y==y) then
+						obj:set_on()
+				else
+					obj:set_off()
+				end
+				obj:draw()
+				y+=1
+			end
+			x+=1
+		end
+	end
+	
+ grid.step=function(self)
+		r=rnd()
+		local x=0
+		local y=0
+		if r<=0.25 then
+			x=1
+		elseif r<=0.50 then
+			y=1
+		elseif r<=0.75 then
+		 x=-1
+		else
+			y=-1
+		end
+		
+		self.point.x+=x
+		self.point.y+=y
+		
+		if self.point.x>#self.objs-1 then
+			self.point.x=1
+		elseif self.point.x<1 then
+			self.point.x=#self.objs-1
+		end
+		
+		if self.point.y>#self.objs-1 then
+			self.point.y=1
+		elseif self.point.y<1 then
+			self.point.y=#self.objs-1
+		end
+	end
+	
+	return grid
+end
+
+function burn()
+	for i=0,64 do
+		x=rnd(128)
+		y=rnd(128)
+		
+		pset(x,y,2)
+	end
+end
+
+g=new_grid()
+fc=0
+_set_fps(60)
+
+month=stat(81)
+day=stat(82)
+
+cls(2)
+::♥::
+if t()<2 then
+	print("random walk ii",36,59,1)
+	print(month.."/"..day,55,65)
+elseif t()==2 then
+	cls(2)
+else
+	burn()
+	g:draw()
+	
+	if btnp(❎) or btnp(🅾️)then
+		local p={}
+		p={x=1+rnd(15)\1,y=1+rnd(15)\1}
+		g.temp_p=p
+	end
+	
+	fc+=1
+	if fc%4==0 then
+		g:step()
+	end
+	
+	if fc%1200==0 then
+		srand(31*stat(81)+stat(82))
+		fc=0
+	end
+end
+flip()
+goto ♥
+```

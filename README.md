@@ -1,6 +1,7 @@
 # Pico-8 Art Carts
 
 ## 2022
+[<img src='./plasma_moss/plasma_moss.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/plasma_moss)
 [<img src='./bad_sort/bad_sort.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_sort)
 [<img src='./bad_marble/bad_marble.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_marble)
 [<img src='./cosine_river/cosine_river.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/cosine_river)

@@ -1,0 +1,51 @@
+<h1>bad iris</h1>
+
+<img src='bad_iris.gif'></img>
+<img src='bad_iris.png'></img>
+
+``` Lua
+-- bad iris
+-- alexthescott
+
+pal({[0]=129,1,133,130,2,136,8,137,142,14,143,15,135,7},1)
+
+rot={}
+
+for i=1,128 do
+	pos={i/128,0.0001*rnd((i+32)/64)}
+	add(rot,pos)
+end
+
+cls()
+::♥::
+for i=0,456 do
+	x=rnd(128)
+	y=rnd(128)
+	a=atan2((64-x)/128,(64-y)/128)
+	x2=x-cos(a)
+	y2=y-sin(a)
+	pset(x2,y2,max(pget(x,y)-1,0))
+end
+
+for o in all(rot) do
+	for i=0,4 do
+		a=4
+		r=22+rnd(63)
+		x=64+sin(o[1])*r
+		y=64+cos(o[1])*r
+		if rnd()<0.5 then
+			x+=r/a*rnd()
+		else
+			x-=r/a*rnd()
+		end
+		if rnd()<0.5 then
+			y+=r/a*rnd()
+		else
+			y-=r/a*rnd()
+		end
+		pset(x,y,min(pget(x,y)+1,13))
+	end
+	o[1]+=o[2]
+end
+goto ♥
+```

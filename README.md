@@ -3,6 +3,7 @@
 ## 2022
 
 #### Feb
+[<img src='./bad_iris/bad_iris.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_iris)
 [<img src='./single_curved_line/single_curved_line.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/single_curved_line)
 [<img src='./space/space.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/space)
 

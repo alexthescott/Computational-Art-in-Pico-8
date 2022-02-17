@@ -31,10 +31,7 @@ for i,ob in ipairs(o) do
 	c=cos(ob[3])/2
 	x=x*c-y*s+64
 	y=x*s+y*c+64
- --x+=64
-	--y+=64
 	ob[2]+=inc/32
-	--ob[1]+=inc/32
 	circfill(x,y,1,1+ob[3]*15)
 end
 

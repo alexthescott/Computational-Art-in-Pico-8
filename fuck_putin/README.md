@@ -1,0 +1,120 @@
+<h1>fuck putin</h1>
+
+<img src='fuck_putin.gif'></img>
+<img src='fuck_putin.png'></img>
+
+``` Lua
+-- fuck putin
+-- alexthescott
+
+-- new seed every day of the year 
+srand(31*stat(81)+stat(82)) 
+
+pal({[0]=140,10},1)
+
+t1=rnd()
+t2=rnd()
+t3=rnd()
+t4=rnd()
+
+function bad_square_burn()
+	for i=1,34 do
+		x=(rnd(16)\1)*8
+		y=(rnd(16)\1)*8
+		if x!=0 and x!=120 then
+			x+=(rnd(min(x,128-x,4))\1)-2
+		end
+		if y!=0 and y!=120 then
+			y+=(rnd(min(y,128-y,4))\1)-2
+		end
+		
+		for i=1,20 do
+			rx=x+rnd(8)\1
+			ry=y+rnd(8)\1
+			v=get_score(rx,ry)
+			pset(rx,ry,v)
+		end
+	end
+end	
+
+function good_square_burn()
+	for i=1,34 do
+		x=(rnd(16)\1)*8
+		y=(rnd(16)\1)*8
+		
+		for i=1,20 do
+			rx=x+rnd(8)\1
+			ry=y+rnd(8)\1
+			v=get_score(rx,ry)
+			pset(rx,ry,v)
+		end
+	end
+end
+
+function good_byte_square()
+	for i=1,14 do
+		x=(rnd(16)\1)*8
+		y=(rnd(16)\1)*8
+		for rx=x,x+7 do
+			for ry=y,y+7 do
+				v=get_score(rx,ry)
+				pset(rx,ry,v)
+			end
+		end
+	end
+end
+
+function perfect_scan()
+	for i=1,7 do
+		p=-1+rnd(129)
+		for y=p,p+1 do
+			for x=p%2,127,2 do
+				v=get_score(x,y)
+				pset(x,y,v)
+			end
+		end
+	end
+end
+
+function get_score(x,y)
+	v1=1.01+sin(x/128+y/64)*cos(t*t1)
+	v2=1.01+(cos(y/128+y/32)*sin(t*t2))/0.5
+	v3=1.01+cos(y/128-y/32)/cos(t*t3)
+	v4=1.01+sin(y/128)/sin(t*t4)
+	v=v1/v2+v3+v4
+	d=((x-64)^2+(y-64)^2)^.5
+	peace=(d<56 and d>40) or
+			(x>56 and x<72 and y>8 and y<120) or
+			(y<128-x+10 and y>128-x-10 and x>32 and x<64) or
+			(y<x+10 and y>x-10 and x>64 and x<96)
+	if(peace)v+=1
+	v%=2
+	return v
+end
+
+t=0.5
+vard=rnd(4)\1
+year=stat(80)
+month=stat(81)
+day=stat(82)
+cls()
+_set_fps(60)
+::♥::
+if time()<2 then
+	print("fuck putin",44,59,1)
+	print(year.."/"..month.."/"..day,47,65)
+else
+	if vard==0 then
+			perfect_scan()
+		elseif vard==1 then
+		 good_square_burn()
+		elseif vard==2 then
+		 good_byte_square()
+		elseif vard==3 then
+		 bad_square_burn()
+	end
+	
+	t+=0.00003
+end
+goto ♥
+```

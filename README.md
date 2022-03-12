@@ -2,6 +2,11 @@
 
 ## 2022
 
+#### Mar
+
+[<img src='./colorful_squigle/colorful_squigle.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/colorful_squigle)
+[<img src='./fuck_putin/fuck_putin.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/fuck_putin)
+
 #### Feb
 [<img src='./bad_iris/bad_iris.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_iris)
 [<img src='./single_curved_line/single_curved_line.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/single_curved_line)

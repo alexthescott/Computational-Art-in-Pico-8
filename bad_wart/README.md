@@ -1,0 +1,72 @@
+<h1>bad wart</h1>
+
+<img src='bad_wart.gif'></img>
+<img src='bad_wart.png'></img>
+
+[bad wart ipfs](https://ipfs.io/ipfs/bafybeigzilwj5vkxx4hff3bnd3xyqo2tuqfioxl4xjbavt2ysu4d7cnzvq/)
+
+``` Lua
+-- bad wart
+-- alexthescott
+-- 22/4/3
+
+-- bad sprite
+p1={[0]=129,131,139,138,139,131,129,0}
+-- bad veins
+p2={[0]=129,1,2,136,8,136,2,1}
+-- bad fire 
+p3={[0]=2,136,8,142,143,142,8,136}
+-- bad magma
+p4={[0]=0,130,141,136,137,136,141,130}
+
+-- daily seed
+srand(31*stat(81)+stat(82)) 
+
+p={p1,p2,p3,p4}
+pal(rnd(p),1)
+
+--oscilating
+f=rnd()
+g=rnd()
+--const
+p=1+rnd(4)
+w=1+rnd(.05)
+h=rnd()<0.5
+
+s=8*(1+rnd(2)\1)
+sv=s/2
+sc=128/sv
+
+year=stat(80)
+month=stat(81)
+day=stat(82)
+
+_set_fps(60)
+cls()
+::♥::
+if time()<2 then
+	print("bad wart",48,59,1)
+	print(year.."/"..month.."/"..day,47,65)
+else
+	for i=0,sc-1 do
+		for j=0,38-(16-s)*2.4 do
+			if h then
+			 x=i*sv+rnd(sv)\1
+			 y=rnd(128)\1
+			else
+				x=rnd(128)\1
+				y=i*sv+rnd(sv)\1
+			end
+			v=x/100-y/100+f/16
+			z=sin(g)/8
+			c=abs(i-sv)+(p+sin(x/164+f))/(w+cos(z+y/164))*(1+sin(z-x/164))
+			c+=(1.01+cos(v+f+g))+(1.01+sin(v-f))
+			c-=f
+			pset(x,y,c%8)
+		end
+	end
+	f+=0.0002
+	g+=0.0001
+end
+goto ♥
+```

@@ -1,0 +1,8 @@
+Two ripples on top of gentle sin gradients run into each other forever, growing and shrinking to create a distorted lattice. Of three possible palettes, 12 of the 16 colors are chosen at runtime. Written and debugged in Pico-8.
+
+creator: Alex Scott
+source: https://pastebin.com/P5rLHVzy
+date: 2022-4-18 6:12pm
+twitter: @alexthescott
+website: alexthescott.space
+platform: Pico-8, Lua

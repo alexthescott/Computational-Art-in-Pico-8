@@ -4,6 +4,7 @@
 
 #### April
 
+[<img src='./bad_ripple/bad_ripple.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_ripple)
 [<img src='./bad_wart/bad_wart.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_wart)
 
 #### Mar

@@ -1,4 +1,4 @@
-<h1>colorful squigle</h1>
+<h1>colorful squiggle</h1>
 
 <img src='colorful_squigle.gif'></img>
 <img src='colorful_squigle.png'></img>

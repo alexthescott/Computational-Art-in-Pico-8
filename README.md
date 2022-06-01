@@ -2,6 +2,10 @@
 
 ## 2022
 
+#### May
+[<img src='./bad_star/bad_star.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_star)
+[<img src='./cos_rain/cos_rain.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/cos_rain)
+
 #### April
 
 [<img src='./bad_ripple/bad_ripple.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_ripple)

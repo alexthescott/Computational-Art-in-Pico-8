@@ -1,0 +1,17 @@
+<h1>cos rain</h1>
+
+<img src='cos_rain.gif'></img>
+<img src='cos_rain.png'></img>
+
+``` Lua
+-- cos rain
+-- alexthescott
+-- 22/5/31
+
+?"\^!5f10█🐱2☉웃🅾️◆"
+l={}t=0r=rnd;p=pset;cls()_set_fps(60)::♥::for i=0,2024 do
+x=r(128)y=r(128)p(x,y,max(0,pget(x,y)-1))end
+add(l,{r(128),0})for v in all(l)do p(v[1],v[2],5)p(v[2],v[1],5)
+v[2]+=1v[2]+=sin(t+v[2]/94)+v[2]/256if(v[2]>129)del(l,v)end
+t+=0.001flip()goto ♥
+```

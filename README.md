@@ -2,6 +2,12 @@
 
 ## 2022
 
+#### June
+[<img src='./bad_heat_wave/bad_heat_wave.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_heat_wave)
+[<img src='./bad_search/bad_search.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_search)
+[<img src='./bad_slug/bad_slug.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_slug)
+[<img src='./bad_wave/bad_wave.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_wave)
+
 #### May
 [<img src='./bad_star/bad_star.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_star)
 [<img src='./cos_rain/cos_rain.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/cos_rain)
@@ -34,15 +40,10 @@
 [<img src='./bad_ants/bad_ants.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_ants)
 ## 2021
 
-#### Dec
 [<img src='./bad_slant/bad_slant.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_slant)
-
-#### Nov
 [<img src='./bad_burn/bad_burn.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_burn)
 [<img src='./bad_flow/bad_flow.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_flow)
 [<img src='./lofi_3d_4/lofi_3d_4.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/lofi_3d_4)
-
-### Oct
 [<img src='./lofi_3d_1/lofi_3d_1.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/lofi_3d_1)
 [<img src='./lofi_3d_2/lofi_3d_2.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/lofi_3d_2)
 [<img src='./lofi_3d_3/lofi_3d_3.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/lofi_3d_3)
@@ -50,8 +51,6 @@
 [<img src='./memory_probe_6/memory_probe_6.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_4)
 [<img src='./memory_probe_7/memory_probe_7.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_4)
 [<img src='./memory_probe_8/memory_probe_8.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_4)
-
-#### Sep
 [<img src='./memory_probe_4/memory_probe_4.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_4)
 [<img src='./memory_probe_3/memory_probe_3.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_3)
 [<img src='./memory_probe_2/memory_probe_2.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_2)
@@ -75,8 +74,6 @@
 [<img src='./horizontal_burn/horizontal_burn.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/horizontal_burn)
 [<img src='./horizontal_burn_alt/horizontal_burn_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/horizontal_burn_alt)
 [<img src='./its_a_feature_2/its_a_feature_2.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/its_a_feature_2)
-
-#### Aug
 [<img src='./1992_loading_screen/1992_loading_screen.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/1992_loading_screen)
 [<img src='./1993_loading_screen/1993_loading_screen.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/1993_loading_screen)
 [<img src='./1994_loading_screen/1994_loading_screen.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/1994_loading_screen)
@@ -93,7 +90,5 @@
 [<img src='./block_cloud/block_cloud.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/block_cloud)
 [<img src='./block_cloud_alt/block_cloud_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/block_cloud_alt)
 [<img src='./its_a_feature/its_a_feature.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/its_a_feature)
-
-#### July
 [<img src='./bad_coin_flip/bad_coin_flip.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_coin_flip)
 [<img src='./bad_coin_flip_alt/bad_coin_flip_alt.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_coin_flip_alt)

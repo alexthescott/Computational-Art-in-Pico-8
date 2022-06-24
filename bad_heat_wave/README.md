@@ -1,20 +1,24 @@
-<h1>colorful squiggle</h1>
+<h1>bad heat wave</h1>
 
-<img src='colorful_squigle.gif'></img>
-<img src='colorful_squigle.png'></img>
+<img src='bad_heat_wave.gif'></img>
+<img src='bad_heat_wave.png'></img>
 
 ``` Lua
--- colorful squigle
+-- bad heat wave
 -- alexthescott
--- 22/3/12
+-- 22/6/19
 
-?"\^!5f10🐱2☉8웃🅾️:♥"
-d=128
-l,f,q,r,c,s=d*4,0,rnd(),rnd(),cos,sin cls()_set_fps(60)::_::cls()
-for i=1,l do
-u=i/d
-v=f/l
-x=(1+(c(u/4))/2)*64+c(i/l+v*q)*6+c(u+v*r)*8+c(u/2+v)*12y=(1+(s(u)/2)/2)*64+s(i/l+v*r)*6+s(u+v*q)*8+s(u/4+v/8/r)*8
-circfill(x,y,2,1+x/y/0.7)end
-f+=1flip()goto _
+pal({7,15,143,142,14,8,136,137,9,10,135,138,11,139,12,140},1)
+r,c=rnd,cos
+q=128t=r()v=r()
+::♥::
+for i=0,512 do
+x=r(q)
+y=r(q)-1
+d=2+c(v*y/q+t+c(y/q+t))*c(x/q+t)+(((x-64)^2+(y-64)^2)^0.5)/7
+?"\18",x,y,d
+end
+t+=0.0005
+flip()
+goto ♥
 ```

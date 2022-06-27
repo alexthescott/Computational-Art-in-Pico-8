@@ -3,6 +3,7 @@
 ## 2022
 
 #### June
+[<img src='./entropy_lock_pick/entropy_lock_pick.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/entropy_lock_pick)
 [<img src='./bad_heat_wave/bad_heat_wave.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_heat_wave)
 [<img src='./bad_search/bad_search.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_search)
 [<img src='./bad_slug/bad_slug.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_slug)

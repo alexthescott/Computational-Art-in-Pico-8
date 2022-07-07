@@ -1,0 +1,99 @@
+-- bad saturn
+-- alexthescott
+-- 22/6/29
+
+-- ty to @aebrer for this maths
+rng = stat(6)
+if rng == "" then
+rng=tostr(rnd(-1)\1)..","..tostr(1+rnd(3)\1)..","..tostr(rnd(16)\1)..","
+end
+rng_vals = {}
+c_num = ""
+for i=1,#rng do
+ if sub(rng,i,i) != "," then
+  c_num = c_num..sub(rng,i,i)
+ else 
+  add(rng_vals,tonum(c_num))
+  c_num = ""
+ end
+end
+
+srand(rng_vals[1])
+
+function forward()
+	v=c[1]
+	del(c,v)
+	c[#c+1]=v
+	pal(c,1)
+end
+
+p1={7,6,135,10,138,11,139,3,131,12,140,1,129,130,128,0}
+p2={7,135,10,9,15,143,142,137,14,136,8,2,130,133,128,0}
+p3={7,15,143,142,14,8,136,137,9,10,135,138,11,139,12,140}
+
+p={p1,p2,p3}
+c=p[rng_vals[2]]
+pal(c,1)
+
+for i=1,rnd(rng_vals[3]) do
+	forward()
+end
+
+t=rnd()
+r=rnd()
+p=rnd()
+c,s=sin,cos
+cls()
+::♥::
+if time()<2 then
+	print("bad saturn",46,59)
+	print("seed:"..rng_vals[1],46,65)
+else
+	party=rnd()<(1+sin(0.5-t))/2
+	for i=0,1000 do
+		x=rnd(128)
+		y=rnd(128)
+		-- radial burn
+		if not party then
+			a=atan2((64-x)/128,(64-y)/128)
+			x2=x-cos(a)
+			y2=y-sin(a)
+			pset(x2,y2,max(pget(x,y)-1,0))
+		-- og burn
+		else
+			pset(x,y,max(pget(x,y)-1,0))
+		end
+	end
+	for o=1,6 do
+		j=o*13
+		for i=1,128 do
+		 
+			k=o/12
+			a=(i-1)/128
+			b=i/128
+			x,y=64+s(r+k)*c(a+t)*j,64+s(a)*j
+			u,v=64-c(p+k)*c(b)*j,64+s(b)*j
+			line(x,y,u,v,10-o)
+		end
+	end
+	t+=0.001
+	r+=0.0002
+	r+=0.0006
+	if rnd(0.7)<(1+sin(t/2))/2 then
+		if t*100%8<=4 then
+			w=3+rnd(10)
+			h=10+rnd(86)
+		else
+			w=10+rnd(86)
+			h=3+rnd(10)
+		end
+		x=rnd(128-w)
+		y=rnd(128-h)
+		xo=rnd(4)*(1-2*(rnd(2)\1))
+		yo=rnd(4)*(1-2*(rnd(2)\1))
+		sspr(x,y,w,h,x+xo,y+yo,w,h)
+	end
+	poke(0x5f55,0x6000,8192)
+end
+flip()
+goto ♥

@@ -1,20 +1,19 @@
-<h1>colorful squiggle</h1>
+<h1>bad wave</h1>
 
-<img src='colorful_squigle.gif'></img>
-<img src='colorful_squigle.png'></img>
+<img src='bad_wave.gif'></img>
+<img src='bad_wave.png'></img>
 
 ``` Lua
--- colorful squigle
+-- bad wave
 -- alexthescott
--- 22/3/12
+-- 22/6/5
 
-?"\^!5f10🐱2☉8웃🅾️:♥"
-d=128
-l,f,q,r,c,s=d*4,0,rnd(),rnd(),cos,sin cls()_set_fps(60)::_::cls()
-for i=1,l do
-u=i/d
-v=f/l
-x=(1+(c(u/4))/2)*64+c(i/l+v*q)*6+c(u+v*r)*8+c(u/2+v)*12y=(1+(s(u)/2)/2)*64+s(i/l+v*r)*6+s(u+v*q)*8+s(u/4+v/8/r)*8
-circfill(x,y,2,1+x/y/0.7)end
-f+=1flip()goto _
+?"\^!5f10█🐱2☉웃🅾️◆"
+l={}f=0z=128r=rnd::_::
+for i=0,2824 do x,y=r(z),r(z)pset(x,y,max(0,pget(x,y)-1))end
+if(f%64==0)add(l,{-16})
+for e in all(l)do for x=1,127do
+y=e[1]+cos(e[1]/z+x/z+f/z)*(1+e[1]/16)pset(x,y,6)end
+e[1]+=.25if(e[1]>136)del(l,e)end
+f+=1f%=2048flip()goto _
 ```

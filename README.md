@@ -3,7 +3,7 @@
 ## 2022
 
 #### Aug
-[<img src='./ancient_screensaver_01/ancient_screensaver_01.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/breathing_star_gate)
+[<img src='./ancient_screensaver_01/ancient_screensaver_01.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/ancient_screensaver_01)
 
 #### July
 [<img src='./breathing_star_gate/breathing_star_gate.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/breathing_star_gate)

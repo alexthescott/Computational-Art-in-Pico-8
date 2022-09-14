@@ -2,6 +2,9 @@
 
 ## 2022
 
+#### Sep
+[<img src='./ancient_screensaver_02/ancient_screensaver_02.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/ancient_screensaver_02)
+
 #### Aug
 [<img src='./ancient_screensaver_01/ancient_screensaver_01.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/ancient_screensaver_01)
 

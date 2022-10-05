@@ -2,6 +2,9 @@
 
 ## 2022
 
+#### Oct
+[<img src='./bad_ring/bad_ring.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_ring)
+
 #### Sep
 [<img src='./ancient_screensaver_02/ancient_screensaver_02.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/ancient_screensaver_02)
 
@@ -59,9 +62,9 @@
 [<img src='./lofi_3d_2/lofi_3d_2.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/lofi_3d_2)
 [<img src='./lofi_3d_3/lofi_3d_3.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/lofi_3d_3)
 [<img src='./memory_probe_5/memory_probe_5.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_5)
-[<img src='./memory_probe_6/memory_probe_6.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_4)
-[<img src='./memory_probe_7/memory_probe_7.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_4)
-[<img src='./memory_probe_8/memory_probe_8.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_4)
+[<img src='./memory_probe_6/memory_probe_6.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_6)
+[<img src='./memory_probe_7/memory_probe_7.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_7)
+[<img src='./memory_probe_8/memory_probe_8.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_8)
 [<img src='./memory_probe_4/memory_probe_4.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_4)
 [<img src='./memory_probe_3/memory_probe_3.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_3)
 [<img src='./memory_probe_2/memory_probe_2.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/memory_probe_2)

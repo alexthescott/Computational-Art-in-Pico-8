@@ -1,0 +1,38 @@
+-- bad ring
+-- alexthescott
+-- 22/9/30
+
+-- fxhash()
+rng = stat(6)
+if rng == "" then
+rng=tostr(rnd(-1)\1)..","..tostr(1+rnd(3)\1)..","..tostr(rnd(16)\1)..","
+end
+rng_vals = {}
+c_num = ""
+for i=1,#rng do
+ if sub(rng,i,i) != "," then
+  c_num = c_num..sub(rng,i,i)
+ else 
+  add(rng_vals,tonum(c_num))
+  c_num = ""
+ end
+end
+srand(rng_vals[1])
+
+-- tweetcart
+cls()
+r=rnd
+p=srand
+q=poke
+n=cos
+f=0g=r()v=128s=r(-1)p(s)c=r(9)%1+4
+q(0x5f54,0x60)
+for i=0,16 do pal (i,(r(33)-17),1)end
+::_::
+flip()b=(g%9)/2g+=r(.01)
+for i=0,v do
+m=1+n(g/v)\2
+line(64+n(n(g/8-i/v))*32*m,64+n(n(g/v-i/v))*32*m,i/4)
+end
+if(r()>.001)sspr(1,1,v-2,v-2,0,0,v,v)
+goto _

@@ -2,6 +2,9 @@
 
 ## 2022
 
+#### Nov
+[<img src='./manfred_mohr_random_walk_remix/manfred_mohr_random_walk_remix.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/manfred_mohr_random_walk_remix)
+
 #### Oct
 [<img src='./bad_ring/bad_ring.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_ring)
 

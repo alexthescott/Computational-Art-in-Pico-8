@@ -1,10 +1,10 @@
 <h1>colorful squiggle</h1>
 
-<img src='colorful_squigle.gif'></img>
-<img src='colorful_squigle.png'></img>
+<img src='colorful_squiggle.gif'></img>
+<img src='colorful_squiggle.png'></img>
 
 ``` Lua
--- colorful squigle
+-- colorful squiggle
 -- alexthescott
 -- 22/3/12
 

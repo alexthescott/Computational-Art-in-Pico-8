@@ -1,0 +1,29 @@
+-- alexthescott
+-- bad fuzz
+-- 22/12/16
+
+rng = stat(6)
+if rng == "" then
+rng=tostr(rnd(-1)\1)..","..tostr(1+rnd(3)\1)..","..tostr(rnd(16)\1)..","
+end
+rng_vals = {}
+c_num = ""
+for i=1,#rng do
+ if sub(rng,i,i) != "," then
+  c_num = c_num..sub(rng,i,i)
+ else 
+  add(rng_vals,tonum(c_num))
+  c_num = ""
+ end
+end
+
+--tweetcart
+poke(24364,5)r=rnd
+z=r(.0004)p=.5+r(2)+5e=r(9)+1g=8f=128n=cos
+for i=0,7do pal(i,(r{8,-7,9,10,11,12,140}),1)end::♥::g+=z
+for i=0,768do
+x=r(f)y=r(f)pset(x-n(x),y-n(y),max(pget(x,y)-1,0))end
+for i=0,32do
+m=(p+n(g))*7
+line(n(n(g/p-i/32))*m+64,n(n(g/7-i/7))*m+64,i)end
+goto ♥

@@ -6,6 +6,7 @@
 [<img src='./bad_static/bad_static.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_static)
 [<img src='./six_points/six_points.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/six_points)
 [<img src='./manfred_mohr_random_walk_remix/manfred_mohr_random_walk_remix.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/manfred_mohr_random_walk_remix)
+[<img src='./bad_fuzz/bad_fuzz.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_fuzz)
 
 #### Oct
 [<img src='./bad_ring/bad_ring.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/bad_ring)

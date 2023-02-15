@@ -40,7 +40,7 @@
 #### Mar
 
 [<img src='./unsacred_geometry/unsacred_geometry.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/unsacred_geometry)
-[<img src='./colorful_squigle/colorful_squigle.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/colorful_squigle)
+[<img src='./colorful_squiggle/colorful_squiggle.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/colorful_squiggle)
 [<img src='./fuck_putin/fuck_putin.png'/>](https://github.com/alexthescott/Computational-Art-in-Pico-8/tree/main/fuck_putin)
 
 #### Feb

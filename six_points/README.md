@@ -4,8 +4,10 @@
 <img src='six_points.png'></img>
 
 ``` Lua
+-- six points
 -- alexthescott
 -- 22/7/9
+
 ?"\^!5f100🐱☉8웃9:♥⌂;⬅️3⬇️😐1"
 _set_fps(60)
 t=rnd()

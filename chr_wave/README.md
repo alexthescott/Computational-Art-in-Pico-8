@@ -4,9 +4,9 @@
 <img src='chr_wave.png'></img>
 
 ``` Lua
+-- chr wave
 -- alexthescott
 -- 23/5/5 1:31pm
--- chr wave
 
 poke(24364,7)t=0p={}for x=0,16do?"\^!5f100☉8🅾️◆"
 cls()for y=0,16do
